@@ -7,12 +7,13 @@ import * as styles from './Home.scss';
 interface IHomeProps {
 	name: string;
 	profile: IProfile | null;
+	onClickImport: () => void;
 	onClickLogout: () => void;
 }
 
 export default class Home extends React.PureComponent<IHomeProps, void> {
 	render() {
-		const { name, profile, onClickLogout } = this.props;
+		const { name, profile, onClickImport, onClickLogout } = this.props;
 		return (
 			<div>
 				<h1>{name}</h1>
@@ -20,6 +21,7 @@ export default class Home extends React.PureComponent<IHomeProps, void> {
 					<Banner type='message' display='Loading profile...' /> :
 					this.renderProfile()
 				}
+				<Button className={styles.option} type='primary' display='Import Weight Records' onClick={onClickImport} />
 				<Button className={styles.option} type='primary' display='Logout' onClick={onClickLogout} />
 			</div>
 		);

@@ -81,5 +81,17 @@ namespace DietApi
 				command.ExecuteNonQuery();
 			}
 		}
+
+		public static void UpdateWeight(int userId, string when, double weightInPounds)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Weight_M"))
+			{
+				command.Parameters.AddWithValue("@userId", userId);
+				command.Parameters.AddWithValue("@when", when);
+				command.Parameters.AddWithValue("@weightInPounds", weightInPounds);
+				command.ExecuteNonQuery();
+			}
+		}
 	}
 }

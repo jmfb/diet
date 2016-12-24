@@ -13,6 +13,7 @@ import AuthenticateContainer from './containers/AuthenticateContainer';
 import ErrorContainer from './containers/ErrorContainer';
 import ApplicationContainer from './containers/ApplicationContainer';
 import HomeContainer from './containers/HomeContainer';
+import ImportContainer from './containers/ImportContainer';
 import './index.scss';
 
 function authenticate(nextState: RouterState, redirect: RedirectFunction) {
@@ -34,6 +35,7 @@ ReactDOM.render(
 		<Route path='/error' component={ErrorContainer} />
 		<Route path='/' component={ApplicationContainer} onEnter={authenticate}>
 			<IndexRoute component={HomeContainer} />
+			<Route path='import' component={ImportContainer} />
 		</Route>
 	</Router>,
 	document.getElementById('root')

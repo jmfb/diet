@@ -1,0 +1,28 @@
+@import "../variables";
+
+.progress {
+	margin-top: 0.5em;
+}
+
+.count {
+	background-color: white;
+	border-radius: 4px;
+	box-shadow: $box-shadow;
+	padding: 0.5em;
+	margin-top: 1em;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+.record {
+	display: flex;
+	flex-direction: row;
+}
+
+.when {
+	padding-right: 0.5em;
+}
+
+.weight {
+	padding-left: 0.5em;
+}

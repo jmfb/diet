@@ -14,7 +14,7 @@ export function getProfile() {
 }
 
 export function updateProfile(profile: IProfile) {
-	return fetch(`/api/Profiles/UpdateProfile`, {
+	return fetch('/api/Profiles/UpdateProfile', {
 		credentials: 'same-origin',
 		method: 'POST',
 		headers: {

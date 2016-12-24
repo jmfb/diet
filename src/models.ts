@@ -21,3 +21,8 @@ export interface IProfile {
 	birthYear: number | null;
 	targetWeightInPounds: number | null;
 }
+
+export interface IWeightRecord {
+	when: string;
+	weightInPounds: number;
+}
