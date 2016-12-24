@@ -1,0 +1,25 @@
+@import "../variables";
+
+.root {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	padding: 0.5em;
+	display: block;
+	width: 100%;
+	text-align: center;
+	border-radius: 4px;
+	box-shadow: $box-shadow;
+	border-left: 2px solid transparent;
+}
+
+.error {
+	color: darken($color-warning, 25%);
+	background-color: lighten($color-warning, 25%);
+	border-left-color: $color-warning;
+}
+
+.message {
+	color: darken(lightblue, 25%);
+	background-color: lightblue;
+	border-left-color: navy;
+}

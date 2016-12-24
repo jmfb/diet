@@ -1,0 +1,62 @@
+@import "variables";
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Lato', sans-serif;
+	font-size: 14px;
+	line-height: 1.555;
+	background-color: #f8f8f8;
+	color: #333;
+	margin: 0;
+}
+
+button {
+	font-family: 'Lato', sans-serif;
+}
+
+header,
+main,
+footer {
+	> * {
+		width: 100%;
+		margin: 0 auto;
+		padding: 0;
+
+		@each $breakpoint in $breakpoints {
+			@media (min-width: $breakpoint) {
+				width: $breakpoint;
+			}
+		}
+	}
+}
+
+header {
+	background-color: $color-background;
+	box-shadow: 0 1px 7px -3px #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+main > * {
+	padding: 16px;
+}
+
+a {
+	text-decoration: none;
+
+	&, &:visited, &:focus, &:hover {
+		color: $color-primary;
+	}
+}
+
+h1 {
+	border-bottom: 1px solid #ccc;
+}
+
+h1:first-child {
+	margin-top: 0;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400italic,600italic,400,600,300);

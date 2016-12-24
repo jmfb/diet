@@ -1,0 +1,15 @@
+.vs
+api/bin
+api/obj
+node_modules
+packages
+web/*.css
+web/*.css.map
+web/*.js
+web/*.js.map
+*.pubxml
+*.pubxml.user
+*.publishproj
+deploy
+build-cold.cmd
+build-web-cold.cmd
