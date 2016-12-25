@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Configuration;
@@ -91,6 +92,28 @@ namespace DietApi
 				command.Parameters.AddWithValue("@when", when);
 				command.Parameters.AddWithValue("@weightInPounds", weightInPounds);
 				command.ExecuteNonQuery();
+			}
+		}
+
+		public static IEnumerable<WeightModel> GetWeights(int userId, string startDate, string endDateExclusive)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Weights_S"))
+			{
+				command.Parameters.AddWithValue("@userId", userId);
+				command.Parameters.AddWithValue("@startDate", startDate);
+				command.Parameters.AddWithValue("@endDateExclusive", endDateExclusive);
+				using (var reader = command.ExecuteReader())
+				{
+					var whenOrdinal = reader.GetOrdinal("When");
+					var weightInPoundsOrdinal = reader.GetOrdinal("WeightInPounds");
+					while (reader.Read())
+						yield return new WeightModel
+						{
+							When = $"{(DateTime)reader[whenOrdinal]:yyyy-MM-dd}",
+							WeightInPounds = (double)reader[weightInPoundsOrdinal]
+						};
+				}
 			}
 		}
 	}

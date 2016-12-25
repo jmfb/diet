@@ -1,0 +1,48 @@
+@import "../variables";
+
+.header {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: visible;
+
+	li {
+		float: left;
+
+		a {
+			display: block;
+			margin-bottom: -1px;
+			color: #777;
+			padding: 0.5em;
+			font-size: 1.5em;
+			text-align: center;
+			text-transform: uppercase;
+			border-bottom: 2px solid transparent;
+			transition:
+				color $timing-reactive linear,
+				background-color $timing-reactive linear,
+				border-bottom-color $timing-reactive linear;
+
+			&.active {
+				border-bottom-color: $color-primary;
+			}
+
+			&:hover {
+				color: $color-primary;
+				background-color: white;
+				border-bottom-color: $color-primary;
+			}
+
+		}
+	}
+
+	@include clearfix();
+}
+
+.small { display: block; }
+.large { display: none; }
+
+@media (min-width: $breakpoint-m) {
+	.small { display: none; }
+	.large { display: block; }
+}
