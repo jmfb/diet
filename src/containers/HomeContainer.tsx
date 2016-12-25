@@ -39,10 +39,6 @@ export default class HomeContainer extends React.PureComponent<void, IHomeContai
 		});
 	}
 
-	handleClickImport = () => {
-		browserHistory.push('/import');
-	}
-
 	handleClickLogout = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('name');
@@ -55,7 +51,6 @@ export default class HomeContainer extends React.PureComponent<void, IHomeContai
 		return (
 			<Home
 				{...{name, profile, lifetime, last30days, last7days}}
-				onClickImport={this.handleClickImport}
 				onClickLogout={this.handleClickLogout} />
 		);
 	}

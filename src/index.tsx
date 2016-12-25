@@ -13,6 +13,8 @@ import AuthenticateContainer from './containers/AuthenticateContainer';
 import ErrorContainer from './containers/ErrorContainer';
 import ApplicationContainer from './containers/ApplicationContainer';
 import HomeContainer from './containers/HomeContainer';
+import WeightContainer from './containers/WeightContainer';
+import RecordWeightContainer from './containers/RecordWeightContainer';
 import ImportContainer from './containers/ImportContainer';
 import './index.scss';
 
@@ -35,7 +37,11 @@ ReactDOM.render(
 		<Route path='/error' component={ErrorContainer} />
 		<Route path='/' component={ApplicationContainer} onEnter={authenticate}>
 			<IndexRoute component={HomeContainer} />
-			<Route path='import' component={ImportContainer} />
+			<Route path='weight'>
+				<IndexRoute component={WeightContainer} />
+				<Route path='add' component={RecordWeightContainer} />
+				<Route path='import' component={ImportContainer} />
+			</Route>
 		</Route>
 	</Router>,
 	document.getElementById('root')

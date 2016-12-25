@@ -73,20 +73,24 @@ export default class WeightGraph extends React.PureComponent<IWeightGraphProps, 
 	}
 
 	render() {
-		if (this.rootNode) {
-			this.drawChart();
-		} else {
-			setTimeout(() => this.drawChart(), 0);
-		}
 		const { title, weightRecords } = this.props;
+		if (weightRecords.length > 1) {
+			if (this.rootNode) {
+				this.drawChart();
+			} else {
+				setTimeout(() => this.drawChart(), 0);
+			}
+		}
 		return (
 			<Card className={styles.root}>
 				<div className={styles.header}>
 					<div className={styles.title}>{title}</div>
 					{weightRecords.length > 0 && this.renderSummary()}
 				</div>
-				{weightRecords.length === 0 ?
-					<div className={styles.none}>No weight records</div> :
+				{weightRecords.length === 0 &&
+					<div className={styles.none}>No weight records</div>
+				}
+				{weightRecords.length > 1 &&
 					<svg ref={node => this.rootNode = node} className={styles.svg}></svg>
 				}
 			</Card>

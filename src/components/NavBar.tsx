@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IndexLink } from 'react-router';
+import { IndexLink, Link } from 'react-router';
 import * as styles from './NavBar.scss';
 
 export default class NavBar extends React.PureComponent<void, void> {
@@ -9,6 +9,7 @@ export default class NavBar extends React.PureComponent<void, void> {
 				<nav>
 					<ul className={styles.header}>
 						<li><IndexLink to='/' activeClassName={styles.active}>Home</IndexLink></li>
+						<li><Link to='/weight' activeClassName={styles.active}>Weight</Link></li>
 					</ul>
 				</nav>
 			</header>

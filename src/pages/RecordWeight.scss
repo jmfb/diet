@@ -1,0 +1,14 @@
+.root {
+}
+
+.weight {
+	width: 100%;
+	text-align: center;
+	font-size: 2em;
+	border: 0;
+	border-bottom: 1px solid black;
+	&:active {
+		border-bottom: 1px solid blue;
+	}
+	margin-bottom: 1em;
+}
