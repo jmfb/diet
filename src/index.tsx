@@ -13,6 +13,7 @@ import AuthenticateContainer from './containers/AuthenticateContainer';
 import ErrorContainer from './containers/ErrorContainer';
 import ApplicationContainer from './containers/ApplicationContainer';
 import HomeContainer from './containers/HomeContainer';
+import ProfileContainer from './containers/ProfileContainer';
 import WeightContainer from './containers/WeightContainer';
 import RecordWeightContainer from './containers/RecordWeightContainer';
 import ImportContainer from './containers/ImportContainer';
@@ -37,6 +38,7 @@ ReactDOM.render(
 		<Route path='/error' component={ErrorContainer} />
 		<Route path='/' component={ApplicationContainer} onEnter={authenticate}>
 			<IndexRoute component={HomeContainer} />
+			<Route path='profile' component={ProfileContainer} />
 			<Route path='weight'>
 				<IndexRoute component={WeightContainer} />
 				<Route path='add' component={RecordWeightContainer} />

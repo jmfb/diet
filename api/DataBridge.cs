@@ -74,11 +74,11 @@ namespace DietApi
 			using (var command = connection.CreateCommand("usp_Profile_U"))
 			{
 				command.Parameters.AddWithValue("@userId", userId);
-				command.Parameters.AddWithValue("@genderId", profile.GenderId);
-				command.Parameters.AddWithValue("@bodyTypeId", profile.BodyTypeId);
-				command.Parameters.AddWithValue("@heightInInches", profile.HeightInInches);
-				command.Parameters.AddWithValue("@birthYear", profile.BirthYear);
-				command.Parameters.AddWithValue("@targetWeightInPounds", profile.TargetWeightInPounds);
+				command.Parameters.AddWithValue("@genderId", profile.GenderId ?? (object)DBNull.Value);
+				command.Parameters.AddWithValue("@bodyTypeId", profile.BodyTypeId ?? (object)DBNull.Value);
+				command.Parameters.AddWithValue("@heightInInches", profile.HeightInInches ?? (object)DBNull.Value);
+				command.Parameters.AddWithValue("@birthYear", profile.BirthYear ?? (object)DBNull.Value);
+				command.Parameters.AddWithValue("@targetWeightInPounds", profile.TargetWeightInPounds ?? (object)DBNull.Value);
 				command.ExecuteNonQuery();
 			}
 		}
