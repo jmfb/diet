@@ -17,6 +17,8 @@ import ProfileContainer from './containers/ProfileContainer';
 import WeightContainer from './containers/WeightContainer';
 import RecordWeightContainer from './containers/RecordWeightContainer';
 import ImportContainer from './containers/ImportContainer';
+import MealsContainer from './containers/MealsContainer';
+import MealContainer from './containers/MealContainer';
 import './index.scss';
 
 function authenticate(nextState: RouterState, redirect: RedirectFunction) {
@@ -43,6 +45,10 @@ ReactDOM.render(
 				<IndexRoute component={WeightContainer} />
 				<Route path='add' component={RecordWeightContainer} />
 				<Route path='import' component={ImportContainer} />
+			</Route>
+			<Route path='meals'>
+				<IndexRoute component={MealsContainer} />
+				<Route path=':id' component={MealContainer} />
 			</Route>
 		</Route>
 	</Router>,

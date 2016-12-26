@@ -116,5 +116,43 @@ namespace DietApi
 				}
 			}
 		}
+
+		public static IEnumerable<PlanSummaryModel> GetPlans(int userId)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Plans_S"))
+			{
+				command.Parameters.AddWithValue("@userId", userId);
+				using (var reader = command.ExecuteReader())
+				{
+					var idOrdinal = reader.GetOrdinal("Id");
+					var nameOrdinal = reader.GetOrdinal("Name");
+					var targetProteinOrdinal = reader.GetOrdinal("TargetProtein");
+					var targetCarbohydratesOrdinal = reader.GetOrdinal("TargetCarbohydrates");
+					var targetFatOrdinal = reader.GetOrdinal("TargetFat");
+					var actualProteinOrdinal = reader.GetOrdinal("ActualProtein");
+					var actualCarbohydratesOrdinal = reader.GetOrdinal("ActualCarbohydrates");
+					var actualFatOrdinal = reader.GetOrdinal("ActualFat");
+					while (reader.Read())
+						yield return new PlanSummaryModel
+						{
+							Id = (int)reader[idOrdinal],
+							Name = (string)reader[nameOrdinal],
+							Target = new NutritionModel
+							{
+								Protein = (double)reader[targetProteinOrdinal],
+								Carbohydrates = (double)reader[targetCarbohydratesOrdinal],
+								Fat = (double)reader[targetFatOrdinal]
+							},
+							Actual = new NutritionModel
+							{
+								Protein = (double)reader[actualProteinOrdinal],
+								Carbohydrates = (double)reader[actualCarbohydratesOrdinal],
+								Fat = (double)reader[actualFatOrdinal]
+							}
+						};
+				}
+			}
+		}
 	}
 }

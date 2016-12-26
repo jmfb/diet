@@ -93,3 +93,32 @@ create table Diet.Weights
 go
 create unique index U_Diet_Weights_UserId_When on Diet.Weights (UserId, [When]);
 go
+create function Diet.tfn_Nutrition
+(
+	@id int
+)
+returns @nutrition table (
+	Protein float not null,
+	Carbohydrates float not null,
+	Fat float not null
+) as
+begin
+	insert into @nutrition (Protein, Carbohydrates, Fat)
+	select	Protein,
+		Carbohydrates,
+		Fat
+	from	Diet.Diet.Foods
+	where	Id = @id;
+	if (@@rowcount = 0)
+	  begin
+		insert into @nutrition (Protein, Carbohydrates, Fat)
+		select	Protein = sum(Ingredients.Quantity * Nutrition.Protein),
+			Carbohydrates = sum(Ingredients.Quantity * Nutrition.Carbohydrates),
+			Fat = sum(Ingredients.Quantity * Nutrition.Fat)
+		from	Diet.Diet.Ingredients as Ingredients
+			cross apply Diet.Diet.tfn_Nutrition(Ingredients.IngredientId) as Nutrition
+		where	Ingredients.RecipeId = @id;
+	  end;
+	return
+end;
+go

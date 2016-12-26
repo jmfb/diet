@@ -26,3 +26,16 @@ export interface IWeightRecord {
 	when: string;
 	weightInPounds: number;
 }
+
+export interface INutrition {
+	protein: number;
+	carbohydrates: number;
+	fat: number;
+}
+
+export interface IPlanSummary {
+	id: number;
+	name: string;
+	target: INutrition;
+	actual: INutrition;
+}
