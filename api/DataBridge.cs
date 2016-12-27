@@ -154,5 +154,67 @@ namespace DietApi
 				}
 			}
 		}
+
+		public static void UpdatePlan(int userId, PlanModel plan)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Plan_M"))
+			using (var meals = new DataTable())
+			{
+				meals.Columns.Add("Id", typeof(int));
+				meals.Columns.Add("Quantity", typeof(double));
+				foreach (var meal in plan.Meals)
+					meals.Rows.Add(meal.Id, meal.Quantity);
+
+				command.Parameters.AddWithValue("@userId", userId);
+				command.Parameters.AddWithValue("@id", plan.Id);
+				command.Parameters.AddWithValue("@name", plan.Name);
+				command.Parameters.AddWithValue("@targetProtein", plan.Target.Protein);
+				command.Parameters.AddWithValue("@targetFat", plan.Target.Fat);
+				command.Parameters.AddWithValue("@targetCarbohydrates", plan.Target.Carbohydrates);
+				command.Parameters.Add(new SqlParameter("@meals", SqlDbType.Structured)
+				{
+					TypeName = "Diet.udt_Meals",
+					Value = meals
+				});
+
+				command.ExecuteNonQuery();
+			}
+		}
+
+		public static IEnumerable<FoodModel> GetFoods(int userId)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Foods_S"))
+			{
+				command.Parameters.AddWithValue("@userId", userId);
+				using (var reader = command.ExecuteReader())
+				{
+					var idOrdinal = reader.GetOrdinal("Id");
+					var nameOrdinal = reader.GetOrdinal("Name");
+					var unitSizeOrdinal = reader.GetOrdinal("UnitSize");
+					var unitMeasureOrdinal = reader.GetOrdinal("UnitMeasure");
+					var siteUrlOrdinal = reader.GetOrdinal("SiteUrl");
+					var proteinOrdinal = reader.GetOrdinal("Protein");
+					var carbohydratesOrdinal = reader.GetOrdinal("Carbohydrates");
+					var fatOrdinal = reader.GetOrdinal("Fat");
+					while (reader.Read())
+						yield return new FoodModel
+						{
+							Id = (int)reader[idOrdinal],
+							Name = (string)reader[nameOrdinal],
+							UnitSize = (double)reader[unitSizeOrdinal],
+							UnitMeasure = (string)reader[unitMeasureOrdinal],
+							SiteUrl = (string)reader[siteUrlOrdinal],
+							Nutrition = new NutritionModel
+							{
+								Protein = (double)reader[proteinOrdinal],
+								Carbohydrates = (double)reader[carbohydratesOrdinal],
+								Fat = (double)reader[fatOrdinal]
+							}
+						};
+				}
+			}
+		}
 	}
 }

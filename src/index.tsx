@@ -18,7 +18,9 @@ import WeightContainer from './containers/WeightContainer';
 import RecordWeightContainer from './containers/RecordWeightContainer';
 import ImportContainer from './containers/ImportContainer';
 import MealsContainer from './containers/MealsContainer';
+import CreateMealContainer from './containers/CreateMealContainer';
 import MealContainer from './containers/MealContainer';
+import * as pluralize from 'pluralize';
 import './index.scss';
 
 function authenticate(nextState: RouterState, redirect: RedirectFunction) {
@@ -32,6 +34,8 @@ function authenticate(nextState: RouterState, redirect: RedirectFunction) {
 		});
 	}
 };
+
+pluralize.addIrregularRule('slice', 'slices');
 
 ReactDOM.render(
 	<Router history={browserHistory}>
@@ -48,6 +52,7 @@ ReactDOM.render(
 			</Route>
 			<Route path='meals'>
 				<IndexRoute component={MealsContainer} />
+				<Route path='new' component={CreateMealContainer} />
 				<Route path=':id' component={MealContainer} />
 			</Route>
 		</Route>

@@ -39,3 +39,17 @@ export interface IPlanSummary {
 	target: INutrition;
 	actual: INutrition;
 }
+
+export interface IFood {
+	id: number;
+	name: string;
+	unitSize: number;
+	unitMeasure: string;
+	siteUrl: string;
+	nutrition: INutrition;
+}
+
+export interface IMeal {
+	id: number;
+	quantity: number;
+}
