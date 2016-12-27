@@ -14,10 +14,22 @@ namespace DietApi.Controllers
 			return DataBridge.GetPlans(UserId).ToList();
 		}
 
+		[HttpGet]
+		public virtual PlanModel GetPlan(int id)
+		{
+			return DataBridge.GetPlan(UserId, id);
+		}
+
 		[HttpPost]
 		public virtual void UpdatePlan([FromBody]PlanModel plan)
 		{
 			DataBridge.UpdatePlan(UserId, plan);
+		}
+
+		[HttpDelete]
+		public virtual void DeletePlan(int id)
+		{
+			DataBridge.DeletePlan(UserId, id);
 		}
 
 		[HttpGet]

@@ -5,9 +5,9 @@ import Button from '~/components/Button';
 import { IFood, IMeal } from '~/models';
 import * as pluralize from 'pluralize';
 import { sum } from 'lodash';
-import * as styles from './CreateMeal.scss';
+import * as styles from './EditMeal.scss';
 
-interface ICreateMealProps {
+interface IEditMealProps {
 	foods: IFood[];
 	name: string;
 	targetCalories: number;
@@ -22,9 +22,11 @@ interface ICreateMealProps {
 	onAddMeal: (id: number) => void;
 	onUpdateQuantity: (index: number, quantity: number) => void;
 	onClickSubmit: () => void;
+	onClickCopy?: () => void;
+	onClickDelete?: () => void;
 }
 
-export default class CreateMeal extends React.PureComponent<ICreateMealProps, void> {
+export default class EditMeal extends React.PureComponent<IEditMealProps, void> {
 	handleChangeName = (e: React.FormEvent<HTMLInputElement>) => {
 		const { onUpdateName } = this.props;
 		onUpdateName(e.currentTarget.value);
@@ -88,7 +90,9 @@ export default class CreateMeal extends React.PureComponent<ICreateMealProps, vo
 			targetFatPercent,
 			meals,
 			submitting,
-			onClickSubmit
+			onClickSubmit,
+			onClickCopy,
+			onClickDelete
 		} = this.props;
 		const targetProtein = targetCalories * targetProteinPercent / 100 / 4;
 		const targetFat = targetCalories * targetFatPercent / 100 / 9;
@@ -199,7 +203,13 @@ export default class CreateMeal extends React.PureComponent<ICreateMealProps, vo
 				</table>
 				{submitting ?
 					<Banner type='message' display='Submitting meal plan...' /> :
-					<Button type='primary' display='Submit' onClick={onClickSubmit} />
+					<Button className={styles.button} type='primary' display='Submit' onClick={onClickSubmit} />
+				}
+				{!submitting && onClickCopy &&
+					<Button className={styles.button} type='secondary' display='Copy' onClick={onClickCopy} />
+				}
+				{!submitting && onClickDelete &&
+					<Button className={styles.button} type='danger' display='Delete' onClick={onClickDelete} />
 				}
 			</Card>
 		);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { browserHistory } from 'react-router';
-import CreateMeal from '~/pages/CreateMeal';
+import EditMeal from '~/pages/EditMeal';
 import { IFood, IMeal } from '~/models';
 import { updatePlan, getFoods } from '~/api/meals';
 
@@ -95,7 +95,7 @@ export default class CreateMealContainer extends React.PureComponent<void, ICrea
 			submitting
 		} = this.state;
 		return (
-			<CreateMeal
+			<EditMeal
 				{...{
 					foods,
 					name,

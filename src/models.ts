@@ -53,3 +53,10 @@ export interface IMeal {
 	id: number;
 	quantity: number;
 }
+
+export interface IPlan {
+	id: number;
+	name: string;
+	target: INutrition;
+	meals: IMeal[];
+}

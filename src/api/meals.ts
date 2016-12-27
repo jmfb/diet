@@ -1,5 +1,6 @@
 import { checkStatus, parseJson, authHeader } from './helpers';
-import { IPlanSummary, INutrition, IFood, IMeal } from '~/models';
+import { IPlanSummary, IPlan, INutrition, IFood, IMeal } from '~/models';
+import * as queryString from 'query-string';
 
 export function getPlans() {
 	return fetch('/api/Meals/GetPlans', {
@@ -11,6 +12,19 @@ export function getPlans() {
 	})
 	.then(checkStatus)
 	.then<IPlanSummary[]>(parseJson);
+}
+
+export function getPlan(id: number) {
+	const query = queryString.stringify({ id });
+	return fetch(`/api/Meals/GetPlan?${query}`, {
+		credentials: 'same-origin',
+		headers: {
+			Accept: 'application/json',
+			Authorization: authHeader()
+		}
+	})
+	.then(checkStatus)
+	.then<IPlan>(parseJson);
 }
 
 export function updatePlan(
@@ -27,6 +41,19 @@ export function updatePlan(
 			['Content-Type']: 'application/json'
 		},
 		body: JSON.stringify({ id, name, target, meals })
+	})
+	.then(checkStatus);
+}
+
+export function deletePlan(id: number) {
+	const query = queryString.stringify({ id });
+	return fetch(`/api/Meals/DeletePlan?${query}`, {
+		credentials: 'same-origin',
+		method: 'DELETE',
+		headers: {
+			Accept: 'application/json',
+			Authorization: authHeader()
+		}
 	})
 	.then(checkStatus);
 }

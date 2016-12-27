@@ -155,6 +155,49 @@ namespace DietApi
 			}
 		}
 
+		public static PlanModel GetPlan(int userId, int id)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Plan_S"))
+			{
+				command.Parameters.AddWithValue("@userId", userId);
+				command.Parameters.AddWithValue("@id", id);
+				using (var reader = command.ExecuteReader())
+				{
+					if (!reader.Read())
+						throw new InvalidOperationException("Missing result.");
+
+					var meals = new List<MealModel>();
+					var plan = new PlanModel
+					{
+						Id = (int)reader["Id"],
+						Name = (string)reader["Name"],
+						Target = new NutritionModel
+						{
+							Protein = (double)reader["TargetProtein"],
+							Carbohydrates = (double)reader["TargetCarbohydrates"],
+							Fat = (double)reader["TargetFat"]
+						},
+						Meals = meals
+					};
+
+					if (!reader.NextResult())
+						throw new InvalidOperationException("Missing meals result.");
+
+					var idOrdinal = reader.GetOrdinal("Id");
+					var quantityOrdinal = reader.GetOrdinal("Quantity");
+					while (reader.Read())
+						meals.Add(new MealModel
+						{
+							Id = (int)reader[idOrdinal],
+							Quantity = (double)reader[quantityOrdinal]
+						});
+
+					return plan;
+				}
+			}
+		}
+
 		public static void UpdatePlan(int userId, PlanModel plan)
 		{
 			using (var connection = CreateConnection())
@@ -178,6 +221,17 @@ namespace DietApi
 					Value = meals
 				});
 
+				command.ExecuteNonQuery();
+			}
+		}
+
+		public static void DeletePlan(int userId, int id)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Plan_D"))
+			{
+				command.Parameters.AddWithValue("@userId", userId);
+				command.Parameters.AddWithValue("@id", id);
 				command.ExecuteNonQuery();
 			}
 		}
