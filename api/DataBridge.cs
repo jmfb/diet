@@ -303,5 +303,34 @@ namespace DietApi
 				}
 			}
 		}
+
+		public static void UpdateFood(int userId, FoodModel food)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Food_M"))
+			{
+				command.Parameters.AddWithValue("@userId", userId);
+				command.Parameters.AddWithValue("@id", food.Id);
+				command.Parameters.AddWithValue("@name", food.Name);
+				command.Parameters.AddWithValue("@unitSize", food.UnitSize);
+				command.Parameters.AddWithValue("@unitMeasure", food.UnitMeasure);
+				command.Parameters.AddWithValue("@siteUrl", food.SiteUrl);
+				command.Parameters.AddWithValue("@protein", food.Nutrition.Protein);
+				command.Parameters.AddWithValue("@fat", food.Nutrition.Fat);
+				command.Parameters.AddWithValue("@carbohydrates", food.Nutrition.Carbohydrates);
+				command.ExecuteNonQuery();
+			}
+		}
+
+		public static void DeleteFood(int userId, int id)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Food_M"))
+			{
+				command.Parameters.AddWithValue("@userId", userId);
+				command.Parameters.AddWithValue("@id", id);
+				command.ExecuteNonQuery();
+			}
+		}
 	}
 }

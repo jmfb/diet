@@ -145,6 +145,8 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Sql\0_Database.sql" />
+    <Content Include="Sql\usp_Food_M.sql" />
+    <Content Include="Sql\usp_Food_D.sql" />
     <Content Include="Sql\usp_Foods_S.sql" />
     <Content Include="Sql\usp_Plan_D.sql" />
     <Content Include="Sql\usp_Plan_S.sql" />

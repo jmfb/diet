@@ -69,3 +69,36 @@ export function getFoods() {
 	.then(checkStatus)
 	.then<IFood[]>(parseJson);
 }
+
+export function updateFood(
+	id: number,
+	name: string,
+	unitSize: number,
+	unitMeasure: string,
+	siteUrl: string,
+	nutrition: INutrition) {
+	return fetch('/api/Meals/UpdateFood', {
+		credentials: 'same-origin',
+		method: 'POST',
+		headers: {
+			Accept: 'application/json',
+			Authorization: authHeader(),
+			['Content-Type']: 'application/json'
+		},
+		body: JSON.stringify({ id, name, unitSize, unitMeasure, siteUrl, nutrition })
+	})
+	.then(checkStatus);
+}
+
+export function deleteFood(id: number) {
+	const query = queryString.stringify({ id });
+	return fetch(`/api/Meals/DeleteFood?${query}`, {
+		credentials: 'same-origin',
+		method: 'DELETE',
+		headers: {
+			Accept: 'application/json',
+			Authorization: authHeader()
+		}
+	})
+	.then(checkStatus);
+}
