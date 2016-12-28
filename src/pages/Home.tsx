@@ -1,9 +1,11 @@
 import * as React from 'react';
 import Button from '~/components/Button';
 import Banner from '~/components/Banner';
+import Card from '~/components/Card';
 import WeightGraph from '~/components/WeightGraph';
-import { IProfile, IWeightRecord, genders, bodyTypes } from '~/models';
+import { IProfile, IWeightRecord } from '~/models';
 import * as styles from './Home.scss';
+import * as cx from 'classnames';
 
 interface IHomeProps {
 	name: string;
@@ -55,14 +57,36 @@ export default class Home extends React.PureComponent<IHomeProps, void> {
 
 	renderProfile = () => {
 		const { profile } = this.props;
-		const { genderId, bodyTypeId, heightInInches, birthYear, targetWeightInPounds } = profile;
+		const { targetWeightInPounds } = profile;
+		const { lifetime } = this.props;
+		const currentWeight = lifetime === null || lifetime.length === 0 ?
+			null :
+			lifetime[lifetime.length - 1].weightInPounds;
+		const difference = targetWeightInPounds === null || currentWeight === null ?
+			null :
+			Math.round((targetWeightInPounds - currentWeight) * 10) / 10;
 		return (
-			<div>
-				{genderId !== null && <div>Gender: {genders[genderId]}</div>}
-				{bodyTypeId !== null && <div>Body Type: {bodyTypes[bodyTypeId]}</div>}
-				{heightInInches !== null && <div>Height: {heightInInches} in.</div>}
-				{birthYear !== null && <div>Birth Year: {birthYear}</div>}
-				{targetWeightInPounds !== null && <div>Target Weight: {targetWeightInPounds} lbs.</div>}
+			<div className={styles.summary}>
+				<Card className={styles.tile}>
+					<div className={styles.label}>Target:</div>
+					{targetWeightInPounds !== null &&
+						<div className={styles.value}>{targetWeightInPounds} <span className={styles.units}>lbs.</span></div>
+					}
+				</Card>
+				<Card className={styles.tile}>
+					<div className={styles.label}>Current:</div>
+					{currentWeight !== null &&
+						<div className={styles.value}>{currentWeight} <span className={styles.units}>lbs.</span></div>
+					}
+				</Card>
+				<Card className={styles.tile}>
+					<div className={styles.label}>Goal:</div>
+					{difference !== null &&
+						<div className={cx(styles.goal, { [styles.negative]: difference < 0 })}>
+							{difference >= 0 ? '+' : ''}{difference} <span className={styles.units}>lbs.</span>
+						</div>
+					}
+				</Card>
 			</div>
 		);
 	}

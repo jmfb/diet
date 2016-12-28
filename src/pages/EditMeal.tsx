@@ -101,7 +101,7 @@ export default class EditMeal extends React.PureComponent<IEditMealProps, void> 
 		const proteinCalories = totalNutrition.protein * 4;
 		const fatCalories = totalNutrition.fat * 9;
 		const carbohydratesCalories = totalNutrition.carbohydrates * 4;
-		const totalCalories = proteinCalories + fatCalories + carbohydratesCalories;
+		const totalCalories = Math.round(proteinCalories + fatCalories + carbohydratesCalories);
 		const fatPercent = totalCalories === 0 ? 0 : Math.round(fatCalories / totalCalories * 100);
 		const carbohydratesPercent = totalCalories === 0 ? 0 : Math.round(carbohydratesCalories / totalCalories * 100);
 		const proteinPercent = 100 - fatPercent - carbohydratesPercent;
@@ -155,7 +155,7 @@ export default class EditMeal extends React.PureComponent<IEditMealProps, void> 
 						<tr>
 							<td className={styles.label}>Actual:</td>
 							<td>{totalCalories}</td>
-							<td>{proteinPercent}/{fatPercent}/{carbohydratesPercent}</td>
+							<td>{proteinPercent} / {fatPercent} / {carbohydratesPercent}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -218,11 +218,11 @@ export default class EditMeal extends React.PureComponent<IEditMealProps, void> 
 	renderMeal = (meal: IMeal, index: number) => {
 		const { foods } = this.props;
 		const food = foods.find(food => food.id === meal.id);
-		const protein = food.nutrition.protein * meal.quantity;
 		const unitMeasure = food.unitMeasure === '' ? food.name : food.unitMeasure;
 		const units = Math.round(meal.quantity * food.unitSize * 10) / 10;
-		const fat = food.nutrition.fat * meal.quantity;
-		const carbohydrates = food.nutrition.carbohydrates * meal.quantity;
+		const protein = Math.round(food.nutrition.protein * meal.quantity * 10) / 10;
+		const fat = Math.round(food.nutrition.fat * meal.quantity * 10) / 10;
+		const carbohydrates = Math.round(food.nutrition.carbohydrates * meal.quantity * 10) / 10;
 		const calories = Math.round(protein * 4 + fat * 9 + carbohydrates * 4);
 		return (
 			<tr key={index}>

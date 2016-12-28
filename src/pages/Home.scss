@@ -1,5 +1,55 @@
+@import "../variables";
+
 .option {
 	display: block;
 	margin-bottom: 1em;
 	width: 100%;
+}
+
+.summary {
+	display: flex;
+	flex-direction: row;
+}
+
+.tile {
+	flex-grow: 1;
+}
+
+.tile + .tile {
+	margin-left: 0.5em;
+}
+
+.label {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-right: 0.5em;
+}
+
+.value {
+	font-size: 1.5em;
+}
+
+.goal {
+	font-size: 1.5em;
+	color: green;
+}
+
+.negative {
+	color: maroon;
+}
+
+.units {
+	display: none;
+}
+
+@media (min-width: $breakpoint-m) {
+	.tile {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: row;
+	}
+
+	.units {
+		display: inline;
+	}
 }
