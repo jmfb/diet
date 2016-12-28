@@ -1,0 +1,36 @@
+.root {
+}
+
+.name {
+	font-size: 2em;
+	width: 100%;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	border: 0;
+	border-bottom: 1px solid black;
+	&:focus {
+		outline: none;
+		border-bottom: 1px solid blue;
+	}
+}
+
+.label {
+	font-weight: bold;
+}
+
+.unitSize {
+	width: 4em;
+}
+
+.siteUrl {
+	width: 35em;
+}
+
+.quantity {
+	width: 3em;
+}
+
+.button {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}

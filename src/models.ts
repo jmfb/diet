@@ -60,3 +60,8 @@ export interface IPlan {
 	target: INutrition;
 	meals: IMeal[];
 }
+
+export interface IIngredient {
+	id: number;
+	quantity: number;
+}

@@ -1,5 +1,5 @@
 import { checkStatus, parseJson, authHeader } from './helpers';
-import { IPlanSummary, IPlan, INutrition, IFood, IMeal } from '~/models';
+import { IPlanSummary, IPlan, INutrition, IFood, IMeal, IIngredient } from '~/models';
 import * as queryString from 'query-string';
 
 export function getPlans() {
@@ -86,6 +86,26 @@ export function updateFood(
 			['Content-Type']: 'application/json'
 		},
 		body: JSON.stringify({ id, name, unitSize, unitMeasure, siteUrl, nutrition })
+	})
+	.then(checkStatus);
+}
+
+export function updateRecipe(
+	id: number,
+	name: string,
+	unitSize: number,
+	unitMeasure: string,
+	siteUrl: string,
+	ingredients: IIngredient[]) {
+	return fetch('/api/Meals/UpdateRecipe', {
+		credentials: 'same-origin',
+		method: 'POST',
+		headers: {
+			Accept: 'application/json',
+			Authorization: authHeader(),
+			['Content-Type']: 'application/json'
+		},
+		body: JSON.stringify({ id, name, unitSize, unitMeasure, siteUrl, ingredients })
 	})
 	.then(checkStatus);
 }

@@ -44,6 +44,12 @@ namespace DietApi.Controllers
 			DataBridge.UpdateFood(UserId, food);
 		}
 
+		[HttpPost]
+		public virtual void UpdateRecipe([FromBody]RecipeModel recipe)
+		{
+			DataBridge.UpdateRecipe(UserId, recipe);
+		}
+
 		[HttpDelete]
 		public virtual void DeleteFood(int id)
 		{

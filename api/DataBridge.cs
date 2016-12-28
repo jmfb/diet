@@ -322,6 +322,33 @@ namespace DietApi
 			}
 		}
 
+		public static void UpdateRecipe(int userId, RecipeModel recipe)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Recipe_M"))
+			using (var ingredients = new DataTable())
+			{
+				ingredients.Columns.Add("Id", typeof(int));
+				ingredients.Columns.Add("Quantity", typeof(double));
+				foreach (var ingredient in recipe.Ingredients)
+					ingredients.Rows.Add(ingredient.Id, ingredient.Quantity);
+
+				command.Parameters.AddWithValue("@userId", userId);
+				command.Parameters.AddWithValue("@id", recipe.Id);
+				command.Parameters.AddWithValue("@name", recipe.Name);
+				command.Parameters.AddWithValue("@unitSize", recipe.UnitSize);
+				command.Parameters.AddWithValue("@unitMeasure", recipe.UnitMeasure);
+				command.Parameters.AddWithValue("@siteUrl", recipe.SiteUrl);
+				command.Parameters.Add(new SqlParameter("@ingredients", SqlDbType.Structured)
+				{
+					TypeName = "Diet.udt_Ingredients",
+					Value = ingredients
+				});
+
+				command.ExecuteNonQuery();
+			}
+		}
+
 		public static void DeleteFood(int userId, int id)
 		{
 			using (var connection = CreateConnection())
