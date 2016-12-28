@@ -304,6 +304,67 @@ namespace DietApi
 			}
 		}
 
+		public static FoodOrRecipeModel GetFood(int userId, int id)
+		{
+			using (var connection = CreateConnection())
+			using (var command = connection.CreateCommand("usp_Food_S"))
+			{
+				command.Parameters.AddWithValue("@userId", userId);
+				command.Parameters.AddWithValue("@id", id);
+				using (var reader = command.ExecuteReader())
+				{
+					if (!reader.Read())
+						throw new InvalidOperationException("Missing result.");
+
+					var ingredients = new List<IngredientModel>();
+					var recipes = new List<int>();
+					var food = new FoodOrRecipeModel
+					{
+						Id = (int)reader["Id"],
+						Name = (string)reader["Name"],
+						UnitSize = (double)reader["UnitSize"],
+						UnitMeasure = (string)reader["UnitMeasure"],
+						SiteUrl = (string)reader["SiteUrl"],
+						Nutrition = null,
+						Ingredients = ingredients,
+						Recipes = recipes
+					};
+
+					if (!reader.NextResult())
+						throw new InvalidOperationException("Missing nutrition result.");
+
+					if (reader.Read())
+						food.Nutrition = new NutritionModel
+						{
+							Protein = (double)reader["Protein"],
+							Fat = (double)reader["Fat"],
+							Carbohydrates = (double)reader["Carbohydrates"]
+						};
+
+					if (!reader.NextResult())
+						throw new InvalidOperationException("Missing ingredient result.");
+
+					var idOrdinal = reader.GetOrdinal("Id");
+					var quantityOrdinal = reader.GetOrdinal("Quantity");
+					while (reader.Read())
+						ingredients.Add(new IngredientModel
+						{
+							Id = (int)reader[idOrdinal],
+							Quantity = (double)reader[quantityOrdinal]
+						});
+
+					if (!reader.NextResult())
+						throw new InvalidOperationException("Missing recipe result.");
+
+					var recipeIdOrdinal = reader.GetOrdinal("RecipeId");
+					while (reader.Read())
+						recipes.Add((int)reader[recipeIdOrdinal]);
+
+					return food;
+				}
+			}
+		}
+
 		public static void UpdateFood(int userId, FoodModel food)
 		{
 			using (var connection = CreateConnection())
@@ -352,7 +413,7 @@ namespace DietApi
 		public static void DeleteFood(int userId, int id)
 		{
 			using (var connection = CreateConnection())
-			using (var command = connection.CreateCommand("usp_Food_M"))
+			using (var command = connection.CreateCommand("usp_Food_D"))
 			{
 				command.Parameters.AddWithValue("@userId", userId);
 				command.Parameters.AddWithValue("@id", id);

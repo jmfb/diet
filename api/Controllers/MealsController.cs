@@ -38,6 +38,12 @@ namespace DietApi.Controllers
 			return DataBridge.GetFoods(UserId).ToList();
 		}
 
+		[HttpGet]
+		public virtual FoodOrRecipeModel GetFood(int id)
+		{
+			return DataBridge.GetFood(UserId, id);
+		}
+
 		[HttpPost]
 		public virtual void UpdateFood([FromBody]FoodModel food)
 		{

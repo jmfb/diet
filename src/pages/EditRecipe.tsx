@@ -22,6 +22,7 @@ interface IEditRecipeProps {
 	onAddIngredient: (id: number) => void;
 	onUpdateQuantity: (index: number, quantity: number) => void;
 	onClickSubmit: () => void;
+	onClickDelete?: () => void;
 }
 
 export default class EditRecipe extends React.PureComponent<IEditRecipeProps, void> {
@@ -58,7 +59,17 @@ export default class EditRecipe extends React.PureComponent<IEditRecipeProps, vo
 	}
 
 	render() {
-		const { availableIngredients, name, unitSize, unitMeasure, siteUrl, ingredients, submitting, onClickSubmit } = this.props;
+		const {
+			availableIngredients,
+			name,
+			unitSize,
+			unitMeasure,
+			siteUrl,
+			ingredients,
+			submitting,
+			onClickSubmit,
+			onClickDelete
+		} = this.props;
 		return (
 			<Card className={styles.root}>
 				<input
@@ -137,6 +148,9 @@ export default class EditRecipe extends React.PureComponent<IEditRecipeProps, vo
 					<Banner type='message' display='Submitting food...' /> :
 					<Button className={styles.button} type='primary' display='Submit' onClick={onClickSubmit} />
 				}
+				{!submitting && onClickDelete &&
+					<Button className={styles.button} type='danger' display='Delete' onClick={onClickDelete} />
+				}
 			</Card>
 		);
 	}
@@ -147,10 +161,10 @@ export default class EditRecipe extends React.PureComponent<IEditRecipeProps, vo
 		const food = foods.find(food => food.id === id);
 		const { name, unitSize, unitMeasure, nutrition } = food;
 		const { protein, fat, carbohydrates } = nutrition;
-		const size = quantity * unitSize;
-		const totalProtein = protein * quantity;
-		const totalFat = fat * quantity;
-		const totalCarbohydrates = carbohydrates * quantity;
+		const size = Math.round(quantity * unitSize * 10) / 10;
+		const totalProtein = Math.round(protein * quantity * 10) / 10;
+		const totalFat = Math.round(fat * quantity * 10) / 10;
+		const totalCarbohydrates = Math.round(carbohydrates * quantity * 10) / 10;
 		const calories = Math.round(totalProtein * 4 + totalFat * 9 + totalCarbohydrates * 4);
 		return (
 			<tr key={index}>

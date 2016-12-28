@@ -65,3 +65,14 @@ export interface IIngredient {
 	id: number;
 	quantity: number;
 }
+
+export interface IFoodOrRecipe {
+	id: number;
+	name: string;
+	unitSize: number;
+	unitMeasure: string;
+	siteUrl: string;
+	nutrition: INutrition | null;
+	ingredients: IIngredient[];
+	recipes: number[];
+}

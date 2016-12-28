@@ -1,5 +1,5 @@
 import { checkStatus, parseJson, authHeader } from './helpers';
-import { IPlanSummary, IPlan, INutrition, IFood, IMeal, IIngredient } from '~/models';
+import { IPlanSummary, IPlan, INutrition, IFood, IMeal, IIngredient, IFoodOrRecipe } from '~/models';
 import * as queryString from 'query-string';
 
 export function getPlans() {
@@ -68,6 +68,19 @@ export function getFoods() {
 	})
 	.then(checkStatus)
 	.then<IFood[]>(parseJson);
+}
+
+export function getFood(id: number) {
+	const query = queryString.stringify({ id });
+	return fetch(`/api/Meals/GetFood?${query}`, {
+		credentials: 'same-origin',
+		headers: {
+			Accept: 'application/json',
+			Authorization: authHeader()
+		}
+	})
+	.then(checkStatus)
+	.then<IFoodOrRecipe>(parseJson);
 }
 
 export function updateFood(

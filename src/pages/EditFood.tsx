@@ -18,6 +18,7 @@ interface IEditFoodProps {
 	onUpdateSiteUrl: (siteUrl: string) => void;
 	onUpdateNutrition: (nutrition: INutrition) => void;
 	onClickSubmit: () => void;
+	onClickDelete?: () => void;
 }
 
 export default class EditFood extends React.PureComponent<IEditFoodProps, void> {
@@ -72,7 +73,16 @@ export default class EditFood extends React.PureComponent<IEditFoodProps, void> 
 	}
 
 	render() {
-		const { name, unitSize, unitMeasure, siteUrl, nutrition, submitting, onClickSubmit } = this.props;
+		const {
+			name,
+			unitSize,
+			unitMeasure,
+			siteUrl,
+			nutrition,
+			submitting,
+			onClickSubmit,
+			onClickDelete
+		} = this.props;
 		const { protein, fat, carbohydrates } = nutrition;
 		return (
 			<Card className={styles.root}>
@@ -154,6 +164,9 @@ export default class EditFood extends React.PureComponent<IEditFoodProps, void> 
 				{submitting ?
 					<Banner type='message' display='Submitting food...' /> :
 					<Button className={styles.button} type='primary' display='Submit' onClick={onClickSubmit} />
+				}
+				{!submitting && onClickDelete &&
+					<Button className={styles.button} type='danger' display='Delete' onClick={onClickDelete} />
 				}
 			</Card>
 		);

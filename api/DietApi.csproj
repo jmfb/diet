@@ -130,6 +130,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FoodOrRecipeModel.cs" />
     <Compile Include="Models\IngredientModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\FoodModel.cs" />
@@ -147,6 +148,8 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Sql\0_Database.sql" />
+    <Content Include="Sql\usp_Food_S.sql" />
+    <Content Include="Sql\usp_Recipe_M.sql" />
     <Content Include="Sql\usp_Food_M.sql" />
     <Content Include="Sql\usp_Food_D.sql" />
     <Content Include="Sql\usp_Foods_S.sql" />
