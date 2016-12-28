@@ -1,0 +1,11 @@
+.root {
+}
+
+.name {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.span + .span {
+	margin-left: 0.5em;
+}

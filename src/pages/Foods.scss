@@ -1,0 +1,15 @@
+.root {
+}
+
+.buttonGroup {
+	display: flex;
+	flex-direction: row;
+}
+
+.button {
+	flex-grow: 1;
+}
+
+.button + .button {
+	margin-left: 0.5em;
+}

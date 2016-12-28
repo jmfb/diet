@@ -21,6 +21,10 @@ import EditWeightContainer from './containers/EditWeightContainer';
 import MealsContainer from './containers/MealsContainer';
 import CreateMealContainer from './containers/CreateMealContainer';
 import MealContainer from './containers/MealContainer';
+import FoodsContainer from './containers/FoodsContainer';
+import CreateFoodContainer from './containers/CreateFoodContainer';
+import CreateRecipeContainer from './containers/CreateRecipeContainer';
+import FoodContainer from './containers/FoodContainer';
 import * as pluralize from 'pluralize';
 import './index.scss';
 
@@ -54,6 +58,12 @@ ReactDOM.render(
 			</Route>
 			<Route path='meals'>
 				<IndexRoute component={MealsContainer} />
+				<Route path='foods'>
+					<IndexRoute component={FoodsContainer} />
+					<Route path='new-food' component={CreateFoodContainer} />
+					<Route path='new-recipe' component={CreateRecipeContainer} />
+					<Route path=':id' component={FoodContainer} />
+				</Route>
 				<Route path='new' component={CreateMealContainer} />
 				<Route path=':id' component={MealContainer} />
 			</Route>
