@@ -13,10 +13,22 @@ namespace DietApi.Controllers
 			DataBridge.UpdateWeight(UserId, when, weightInPounds);
 		}
 
+		[HttpDelete]
+		public virtual void DeleteWeight(string when)
+		{
+			DataBridge.DeleteWeight(UserId, when);
+		}
+
 		[HttpGet]
 		public virtual IEnumerable<WeightModel> GetWeights(string startDate, string endDateExclusive)
 		{
 			return DataBridge.GetWeights(UserId, startDate, endDateExclusive).ToList();
+		}
+
+		[HttpGet]
+		public virtual IEnumerable<WeightModel> GetRecentWeights(int skip, int take)
+		{
+			return DataBridge.GetRecentWeights(UserId, skip, take);
 		}
 	}
 }

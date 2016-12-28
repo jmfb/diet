@@ -6,3 +6,16 @@
 	margin-bottom: 1em;
 	width: 100%;
 }
+
+.record {
+	display: flex;
+	flex-direction: row;
+}
+
+.date {
+	flex-grow: 2;
+}
+
+.weigth {
+	flex-grow: 1;
+}

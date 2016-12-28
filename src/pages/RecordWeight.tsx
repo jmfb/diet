@@ -9,6 +9,7 @@ interface IRecordWeightProps {
 	weightInPounds: string;
 	onUpdateWeight: (weightInPounds: string) => void;
 	onClickSubmit: () => void;
+	onClickDelete?: () => void;
 }
 
 export default class RecordWeight extends React.PureComponent<IRecordWeightProps, void> {
@@ -18,7 +19,7 @@ export default class RecordWeight extends React.PureComponent<IRecordWeightProps
 	}
 
 	render() {
-		const { submitting, weightInPounds, onClickSubmit } = this.props;
+		const { submitting, weightInPounds, onClickSubmit, onClickDelete } = this.props;
 		return (
 			<Card className={styles.root}>
 				<input
@@ -30,7 +31,10 @@ export default class RecordWeight extends React.PureComponent<IRecordWeightProps
 					onChange={this.handleChange} />
 				{submitting ?
 					<Banner type='message' display='Submitting weight record...' /> :
-					<Button type='primary' display='Submit' onClick={onClickSubmit} />
+					<Button className={styles.button} type='primary' display='Submit' onClick={onClickSubmit} />
+				}
+				{!submitting && onClickDelete &&
+					<Button className={styles.button} type='danger' display='Delete' onClick={onClickDelete} />
 				}
 			</Card>
 		);

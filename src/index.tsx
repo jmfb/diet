@@ -17,6 +17,7 @@ import ProfileContainer from './containers/ProfileContainer';
 import WeightContainer from './containers/WeightContainer';
 import RecordWeightContainer from './containers/RecordWeightContainer';
 import ImportContainer from './containers/ImportContainer';
+import EditWeightContainer from './containers/EditWeightContainer';
 import MealsContainer from './containers/MealsContainer';
 import CreateMealContainer from './containers/CreateMealContainer';
 import MealContainer from './containers/MealContainer';
@@ -49,6 +50,7 @@ ReactDOM.render(
 				<IndexRoute component={WeightContainer} />
 				<Route path='add' component={RecordWeightContainer} />
 				<Route path='import' component={ImportContainer} />
+				<Route path=':when' component={EditWeightContainer} />
 			</Route>
 			<Route path='meals'>
 				<IndexRoute component={MealsContainer} />

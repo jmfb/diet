@@ -16,6 +16,19 @@ export function updateWeight(when: string, weightInPounds: number) {
 	.then(checkStatus);
 }
 
+export function deleteWeight(when: string) {
+	const query = queryString.stringify({ when });
+	return fetch(`/api/Weight/DeleteWeight?${query}`, {
+		credentials: 'same-origin',
+		method: 'DELETE',
+		headers: {
+			Accept: 'application/json',
+			Authorization: authHeader()
+		}
+	})
+	.then(checkStatus);
+}
+
 export function getWeights(
 	startDate: moment.Moment,
 	endDateExclusive: moment.Moment) {
@@ -24,6 +37,19 @@ export function getWeights(
 		endDateExclusive: endDateExclusive.format('YYYY-MM-DD')
 	});
 	return fetch(`/api/Weight/GetWeights?${query}`, {
+		credentials: 'same-origin',
+		headers: {
+			Accept: 'application/json',
+			Authorization: authHeader()
+		}
+	})
+	.then(checkStatus)
+	.then<IWeightRecord[]>(parseJson);
+}
+
+export function getRecentWeights(skip: number, take: number) {
+	const query = queryString.stringify({ skip, take });
+	return fetch(`/api/Weight/GetRecentWeights?${query}`, {
 		credentials: 'same-origin',
 		headers: {
 			Accept: 'application/json',

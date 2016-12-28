@@ -15,7 +15,7 @@ export default class WeightGraph extends React.PureComponent<IWeightGraphProps, 
 	private rootNode: SVGElement;
 
 	componentWillUpdate() {
-		while (this.rootNode.firstChild) {
+		while (this.rootNode && this.rootNode.firstChild) {
 			this.rootNode.removeChild(this.rootNode.firstChild);
 		}
 	}

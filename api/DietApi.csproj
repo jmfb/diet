@@ -146,11 +146,14 @@
     <Content Include="Global.asax" />
     <Content Include="Sql\0_Database.sql" />
     <Content Include="Sql\usp_Foods_S.sql" />
+    <Content Include="Sql\usp_Plan_D.sql" />
     <Content Include="Sql\usp_Plan_S.sql" />
     <Content Include="Sql\usp_Plan_M.sql" />
     <Content Include="Sql\usp_Profile_S.sql" />
     <Content Include="Sql\usp_Plans_S.sql" />
+    <Content Include="Sql\usp_RecentWeights_S.sql" />
     <Content Include="Sql\usp_Weights_S.sql" />
+    <Content Include="Sql\usp_Weight_D.sql" />
     <Content Include="Sql\usp_Weight_M.sql" />
     <Content Include="Sql\usp_Profile_U.sql" />
     <Content Include="Sql\usp_Account_M.sql" />
