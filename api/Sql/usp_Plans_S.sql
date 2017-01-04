@@ -24,9 +24,9 @@ select	Plans.Id,
 	ActualCarbohydrates = Actual.Carbohydrates
 from	Diet.Diet.Plans as Plans
 	cross apply (
-		select	Protein = sum(Meals.Quantity * Nutrition.Protein),
-			Carbohydrates = sum(Meals.Quantity * Nutrition.Carbohydrates),
-			Fat = sum(Meals.Quantity * Nutrition.Fat)
+		select	Protein = isnull(sum(Meals.Quantity * Nutrition.Protein), 0),
+			Carbohydrates = isnull(sum(Meals.Quantity * Nutrition.Carbohydrates), 0),
+			Fat = isnull(sum(Meals.Quantity * Nutrition.Fat), 0)
 		from	Diet.Diet.Meals as Meals
 			cross apply Diet.Diet.tfn_Nutrition(Meals.ItemId) as Nutrition
 		where	Meals.PlanId = Plans.Id
