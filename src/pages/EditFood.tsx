@@ -11,6 +11,7 @@ interface IEditFoodProps {
 	unitMeasure: string;
 	siteUrl: string;
 	nutrition: INutrition;
+	recipes: string[];
 	submitting: boolean;
 	onUpdateName: (name: string) => void;
 	onUpdateUnitSize: (unitSize: number) => void;
@@ -18,6 +19,7 @@ interface IEditFoodProps {
 	onUpdateSiteUrl: (siteUrl: string) => void;
 	onUpdateNutrition: (nutrition: INutrition) => void;
 	onClickSubmit: () => void;
+	onClickCancel: () => void;
 	onClickDelete?: () => void;
 }
 
@@ -79,8 +81,10 @@ export default class EditFood extends React.PureComponent<IEditFoodProps, void> 
 			unitMeasure,
 			siteUrl,
 			nutrition,
+			recipes,
 			submitting,
 			onClickSubmit,
+			onClickCancel,
 			onClickDelete
 		} = this.props;
 		const { protein, fat, carbohydrates } = nutrition;
@@ -161,11 +165,29 @@ export default class EditFood extends React.PureComponent<IEditFoodProps, void> 
 						</tr>
 					</tbody>
 				</table>
-				{submitting ?
-					<Banner type='message' display='Submitting food...' /> :
+				{recipes.length > 0 &&
+					<div>
+						<div className={styles.recipeLabel}>Included in the following recipes:</div>
+						<ul className={styles.recipes}>
+							{recipes.map((recipe, i) => (
+								<li key={i}>{recipe}</li>
+							))}
+						</ul>
+					</div>
+				}
+				{submitting &&
+					<Banner type='message' display='Submitting food...' />
+				}
+				{!submitting && name.length === 0 &&
+					<Banner type='error' display='Please enter a name.' />
+				}
+				{!submitting && name.length > 0 &&
 					<Button className={styles.button} type='primary' display='Submit' onClick={onClickSubmit} />
 				}
-				{!submitting && onClickDelete &&
+				{!submitting &&
+					<Button className={styles.button} type='secondary' display='Cancel' onClick={onClickCancel} />
+				}
+				{!submitting && recipes.length === 0 && onClickDelete &&
 					<Button className={styles.button} type='danger' display='Delete' onClick={onClickDelete} />
 				}
 			</Card>

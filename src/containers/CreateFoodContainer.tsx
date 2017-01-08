@@ -58,17 +58,23 @@ export default class CreateFoodContainer extends React.PureComponent<void, ICrea
 		});
 	}
 
+	handleClickCancel = () => {
+		browserHistory.push('/meals/foods');
+	}
+
 	render() {
 		const { name, unitSize, unitMeasure, siteUrl, nutrition, submitting } = this.state;
 		return (
 			<EditFood
 				{...{name, unitSize, unitMeasure, siteUrl, nutrition, submitting}}
+				recipes={[]}
 				onUpdateName={this.handleUpdateName}
 				onUpdateUnitSize={this.handleUpdateUnitSize}
 				onUpdateUnitMeasure={this.handleUpdateUnitMeasure}
 				onUpdateSiteUrl={this.handleUpdateSiteUrl}
 				onUpdateNutrition={this.handleUpdateNutrition}
 				onClickSubmit={this.handleClickSubmit}
+				onClickCancel={this.handleClickCancel}
 				/>
 		);
 	}

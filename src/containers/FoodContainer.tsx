@@ -100,10 +100,14 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 
 	handleClickSubmitFood = () => {
 		this.setState({ submitting: true } as IFoodContainerState);
-		const { name, unitSize, unitMeasure, siteUrl, nutrition } = this.state;
-		updateFood(0, name, unitSize, unitMeasure, siteUrl, nutrition).then(() => {
+		const { id, name, unitSize, unitMeasure, siteUrl, nutrition } = this.state;
+		updateFood(id, name, unitSize, unitMeasure, siteUrl, nutrition).then(() => {
 			browserHistory.push('/meals/foods');
 		});
+	}
+
+	handleClickCancel = () => {
+		browserHistory.push('/meals/foods');
 	}
 
 	handleClickSubmitRecipe = () => {
@@ -138,16 +142,23 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 		if (foods === null || id === null) {
 			return <Banner type='message' display='Loading food...' />;
 		}
+
+		const recipeNames = recipes
+			.filter(recipe => recipe !== id)
+			.map(recipe => foods.find(food => food.id === recipe).name);
+
 		if (nutrition !== null) {
 			return (
 				<EditFood
 					{...{name, unitSize, unitMeasure, siteUrl, nutrition, submitting}}
+					recipes={recipeNames}
 					onUpdateName={this.handleUpdateName}
 					onUpdateUnitSize={this.handleUpdateUnitSize}
 					onUpdateUnitMeasure={this.handleUpdateUnitMeasure}
 					onUpdateSiteUrl={this.handleUpdateSiteUrl}
 					onUpdateNutrition={this.handleUpdateNutrition}
 					onClickSubmit={this.handleClickSubmitFood}
+					onClickCancel={this.handleClickCancel}
 					onClickDelete={this.handleClickDelete}
 					/>
 			);
@@ -158,6 +169,7 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 		return (
 			<EditRecipe
 				{...{foods, availableIngredients, name, unitSize, unitMeasure, siteUrl, ingredients, submitting}}
+				recipes={recipeNames}
 				onUpdateName={this.handleUpdateName}
 				onUpdateUnitSize={this.handleUpdateUnitSize}
 				onUpdateUnitMeasure={this.handleUpdateUnitMeasure}
@@ -165,6 +177,7 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 				onAddIngredient={this.handleAddIngredient}
 				onUpdateQuantity={this.handleUpdateQuantity}
 				onClickSubmit={this.handleClickSubmitRecipe}
+				onClickCancel={this.handleClickCancel}
 				onClickDelete={this.handleClickDelete}
 				/>
 		);

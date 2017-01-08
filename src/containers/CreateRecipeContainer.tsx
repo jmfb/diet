@@ -76,12 +76,17 @@ export default class CreateRecipeContainer extends React.PureComponent<void, ICr
 		});
 	}
 
+	handleClickCancel = () => {
+		browserHistory.push('/meals/foods');
+	}
+
 	render() {
 		const { foods, name, unitSize, unitMeasure, siteUrl, ingredients, submitting } = this.state;
 		const availableIngredients = foods.filter(food => !ingredients.some(ingredient => ingredient.id === food.id));
 		return (
 			<EditRecipe
 				{...{foods, availableIngredients, name, unitSize, unitMeasure, siteUrl, ingredients, submitting}}
+				recipes={[]}
 				onUpdateName={this.handleUpdateName}
 				onUpdateUnitSize={this.handleUpdateUnitSize}
 				onUpdateUnitMeasure={this.handleUpdateUnitMeasure}
@@ -89,6 +94,7 @@ export default class CreateRecipeContainer extends React.PureComponent<void, ICr
 				onAddIngredient={this.handleAddIngredient}
 				onUpdateQuantity={this.handleUpdateQuantity}
 				onClickSubmit={this.handleClickSubmit}
+				onClickCancel={this.handleClickCancel}
 				/>
 		);
 	}

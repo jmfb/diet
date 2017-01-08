@@ -4,6 +4,7 @@ import Button from '~/components/Button';
 import Banner from '~/components/Banner';
 import { IFood, IIngredient } from '~/models';
 import * as pluralize from 'pluralize';
+import { sum } from 'lodash';
 import * as styles from './EditRecipe.scss';
 
 interface IEditRecipeProps {
@@ -14,6 +15,7 @@ interface IEditRecipeProps {
 	unitMeasure: string;
 	siteUrl: string;
 	ingredients: IIngredient[];
+	recipes: string[];
 	submitting: boolean;
 	onUpdateName: (name: string) => void;
 	onUpdateUnitSize: (unitSize: number) => void;
@@ -22,6 +24,7 @@ interface IEditRecipeProps {
 	onAddIngredient: (id: number) => void;
 	onUpdateQuantity: (index: number, quantity: number) => void;
 	onClickSubmit: () => void;
+	onClickCancel: () => void;
 	onClickDelete?: () => void;
 }
 
@@ -58,6 +61,19 @@ export default class EditRecipe extends React.PureComponent<IEditRecipeProps, vo
 		};
 	}
 
+	getTotalNutrition = () => {
+		const { foods, ingredients } = this.props;
+		const details = ingredients.map(ingredient => ({
+			quantity: ingredient.quantity,
+			nutrition: foods.find(food => food.id === ingredient.id).nutrition
+		}));
+		return {
+			protein: sum(details.map(detail => detail.quantity * detail.nutrition.protein)),
+			fat: sum(details.map(detail => detail.quantity * detail.nutrition.fat)),
+			carbohydrates: sum(details.map(detail => detail.quantity * detail.nutrition.carbohydrates))
+		};
+	}
+
 	render() {
 		const {
 			availableIngredients,
@@ -66,10 +82,22 @@ export default class EditRecipe extends React.PureComponent<IEditRecipeProps, vo
 			unitMeasure,
 			siteUrl,
 			ingredients,
+			recipes,
 			submitting,
 			onClickSubmit,
+			onClickCancel,
 			onClickDelete
 		} = this.props;
+
+		const totalNutrition = this.getTotalNutrition();
+		const proteinCalories = totalNutrition.protein * 4;
+		const fatCalories = totalNutrition.fat * 9;
+		const carbohydratesCalories = totalNutrition.carbohydrates * 4;
+		const totalCalories = Math.round(proteinCalories + fatCalories + carbohydratesCalories);
+		const fatPercent = totalCalories === 0 ? 0 : Math.round(fatCalories / totalCalories * 100);
+		const carbohydratesPercent = totalCalories === 0 ? 0 : Math.round(carbohydratesCalories / totalCalories * 100);
+		const proteinPercent = 100 - fatPercent - carbohydratesPercent;
+
 		return (
 			<Card className={styles.root}>
 				<input
@@ -143,12 +171,46 @@ export default class EditRecipe extends React.PureComponent<IEditRecipeProps, vo
 							</td>
 						</tr>
 					</tbody>
+					<tfoot>
+						<tr>
+							<td className={styles.label} colSpan={3}>Total:</td>
+							<td>{Math.round(totalNutrition.protein * 10) / 10}</td>
+							<td>{Math.round(totalNutrition.fat * 10) / 10}</td>
+							<td>{Math.round(totalNutrition.carbohydrates * 10) / 10}</td>
+							<td>{proteinPercent} / {fatPercent} / {carbohydratesPercent}</td>
+						</tr>
+						<tr>
+							<td className={styles.label} colSpan={3}>Calories:</td>
+							<td>{Math.round(proteinCalories)}</td>
+							<td>{Math.round(fatCalories)}</td>
+							<td>{Math.round(carbohydratesCalories)}</td>
+							<td>{totalCalories}</td>
+						</tr>
+					</tfoot>
 				</table>
-				{submitting ?
-					<Banner type='message' display='Submitting food...' /> :
+				{recipes.length > 0 &&
+					<div>
+						<div className={styles.recipeLabel}>Included in the following recipes:</div>
+						<ul className={styles.recipes}>
+							{recipes.map((recipe, i) => (
+								<li key={i}>{recipe}</li>
+							))}
+						</ul>
+					</div>
+				}
+				{submitting &&
+					<Banner type='message' display='Submitting food...' />
+				}
+				{!submitting && name.length === 0 &&
+					<Banner type='error' display='Please enter a name.' />
+				}
+				{!submitting && name.length > 0 &&
 					<Button className={styles.button} type='primary' display='Submit' onClick={onClickSubmit} />
 				}
-				{!submitting && onClickDelete &&
+				{!submitting &&
+					<Button className={styles.button} type='secondary' display='Cancel' onClick={onClickCancel} />
+				}
+				{!submitting && recipes.length === 0 && onClickDelete &&
 					<Button className={styles.button} type='danger' display='Delete' onClick={onClickDelete} />
 				}
 			</Card>
