@@ -12,5 +12,6 @@ namespace DietApi.Models
 		public NutritionModel Nutrition { get; set; }
 		public IEnumerable<IngredientModel> Ingredients { get; set; }
 		public IEnumerable<int> Recipes { get; set; }
+		public IEnumerable<PlanModel> Plans { get; set; }
 	}
 }

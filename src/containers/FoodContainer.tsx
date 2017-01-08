@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 import EditFood from '~/pages/EditFood';
 import EditRecipe from '~/pages/EditRecipe';
 import Banner from '~/components/Banner';
-import { IFood, INutrition, IIngredient } from '~/models';
+import { IFood, INutrition, IIngredient, IPlan } from '~/models';
 import { getFoods, getFood, updateRecipe, updateFood, deleteFood } from '~/api/meals';
 
 interface IFoodContainerProps {
@@ -20,6 +20,7 @@ interface IFoodContainerState {
 	nutrition: INutrition | null;
 	ingredients: IIngredient[];
 	recipes: number[];
+	plans: IPlan[];
 	submitting: boolean;
 }
 
@@ -36,6 +37,7 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 			nutrition: null,
 			ingredients: [],
 			recipes: [],
+			plans: [],
 			submitting: false
 		};
 	}
@@ -45,8 +47,32 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 		getFoods().then(foods => {
 			this.setState({ foods } as IFoodContainerState);
 		});
-		getFood(+params.id).then(food => {
-			const { id, name, unitSize, unitMeasure, siteUrl, nutrition, ingredients, recipes } = food;
+		this.loadFood(+params.id);
+	}
+
+	componentWillReceiveProps(nextProps: IFoodContainerProps) {
+		const { id } = this.state;
+		const nextId = +nextProps.params.id;
+		if (id !== nextId) {
+			this.setState({
+				id: null,
+				name: '',
+				unitSize: 0,
+				unitMeasure: '',
+				siteUrl: '',
+				nutrition: null,
+				ingredients: [],
+				recipes: [],
+				plans: [],
+				submitting: false
+			} as IFoodContainerState);
+			this.loadFood(nextId);
+		}
+	}
+
+	loadFood = (foodId: number) => {
+		getFood(foodId).then(food => {
+			const { id, name, unitSize, unitMeasure, siteUrl, nutrition, ingredients, recipes, plans } = food;
 			this.setState({
 				id,
 				name,
@@ -55,7 +81,8 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 				siteUrl,
 				nutrition,
 				ingredients,
-				recipes
+				recipes,
+				plans
 			} as IFoodContainerState);
 		});
 	}
@@ -118,6 +145,14 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 		});
 	}
 
+	handleClickCopyRecipe = () => {
+		this.setState({ submitting: true } as IFoodContainerState);
+		const { name, unitSize, unitMeasure, siteUrl, ingredients } = this.state;
+		updateRecipe(0, `Copy of ${name}`, unitSize, unitMeasure, siteUrl, ingredients).then(id => {
+			browserHistory.push(`/meals/foods/${id}`);
+		});
+	}
+
 	handleClickDelete = () => {
 		this.setState({ submitting: true } as IFoodContainerState);
 		const { id } = this.state;
@@ -137,6 +172,7 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 			nutrition,
 			ingredients,
 			recipes,
+			plans,
 			submitting
 		} = this.state;
 		if (foods === null || id === null) {
@@ -145,7 +181,9 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 
 		const recipeNames = recipes
 			.filter(recipe => recipe !== id)
-			.map(recipe => foods.find(food => food.id === recipe).name);
+			.map(recipe => foods.find(food => food.id === recipe).name)
+			.concat(plans.map(plan => plan.name))
+			.sort();
 
 		if (nutrition !== null) {
 			return (
@@ -177,6 +215,7 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 				onAddIngredient={this.handleAddIngredient}
 				onUpdateQuantity={this.handleUpdateQuantity}
 				onClickSubmit={this.handleClickSubmitRecipe}
+				onClickCopy={this.handleClickCopyRecipe}
 				onClickCancel={this.handleClickCancel}
 				onClickDelete={this.handleClickDelete}
 				/>

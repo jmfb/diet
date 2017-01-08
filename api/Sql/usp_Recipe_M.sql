@@ -107,5 +107,7 @@ then	delete
 when	matched and ItemIngredients_Merge.Quantity <> SourceValues.Quantity
 then	update set Quantity = SourceValues.Quantity;
 
+select	Id = @id;
+
 commit;
 go

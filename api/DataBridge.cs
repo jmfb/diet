@@ -231,7 +231,7 @@ namespace DietApi
 			}
 		}
 
-		public static void UpdatePlan(int userId, PlanModel plan)
+		public static int UpdatePlan(int userId, PlanModel plan)
 		{
 			using (var connection = CreateConnection())
 			using (var command = connection.CreateCommand("usp_Plan_M"))
@@ -254,7 +254,12 @@ namespace DietApi
 					Value = meals
 				});
 
-				command.ExecuteNonQuery();
+				using (var reader = command.ExecuteReader())
+				{
+					if (!reader.Read())
+						throw new InvalidOperationException("Missing result.");
+					return (int)reader["Id"];
+				}
 			}
 		}
 
@@ -318,6 +323,7 @@ namespace DietApi
 
 					var ingredients = new List<IngredientModel>();
 					var recipes = new List<int>();
+					var plans = new List<PlanModel>();
 					var food = new FoodOrRecipeModel
 					{
 						Id = (int)reader["Id"],
@@ -327,7 +333,8 @@ namespace DietApi
 						SiteUrl = (string)reader["SiteUrl"],
 						Nutrition = null,
 						Ingredients = ingredients,
-						Recipes = recipes
+						Recipes = recipes,
+						Plans = plans
 					};
 
 					if (!reader.NextResult())
@@ -360,12 +367,26 @@ namespace DietApi
 					while (reader.Read())
 						recipes.Add((int)reader[recipeIdOrdinal]);
 
+					if (!reader.NextResult())
+						throw new InvalidOperationException("Missing plan result.");
+
+					var planIdOrdinal = reader.GetOrdinal("Id");
+					var planNameOrdinal = reader.GetOrdinal("Name");
+					while (reader.Read())
+						plans.Add(new PlanModel
+						{
+							Id = (int)reader[planIdOrdinal],
+							Name = (string)reader[planNameOrdinal],
+							Target = null,
+							Meals = null
+						});
+
 					return food;
 				}
 			}
 		}
 
-		public static void UpdateFood(int userId, FoodModel food)
+		public static int UpdateFood(int userId, FoodModel food)
 		{
 			using (var connection = CreateConnection())
 			using (var command = connection.CreateCommand("usp_Food_M"))
@@ -379,11 +400,16 @@ namespace DietApi
 				command.Parameters.AddWithValue("@protein", food.Nutrition.Protein);
 				command.Parameters.AddWithValue("@fat", food.Nutrition.Fat);
 				command.Parameters.AddWithValue("@carbohydrates", food.Nutrition.Carbohydrates);
-				command.ExecuteNonQuery();
+				using (var reader = command.ExecuteReader())
+				{
+					if (!reader.Read())
+						throw new InvalidOperationException("Missing result.");
+					return (int)reader["Id"];
+				}
 			}
 		}
 
-		public static void UpdateRecipe(int userId, RecipeModel recipe)
+		public static int UpdateRecipe(int userId, RecipeModel recipe)
 		{
 			using (var connection = CreateConnection())
 			using (var command = connection.CreateCommand("usp_Recipe_M"))
@@ -406,7 +432,12 @@ namespace DietApi
 					Value = ingredients
 				});
 
-				command.ExecuteNonQuery();
+				using (var reader = command.ExecuteReader())
+				{
+					if (!reader.Read())
+						throw new InvalidOperationException("Missing result.");
+					return (int)reader["Id"];
+				}
 			}
 		}
 

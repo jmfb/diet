@@ -106,5 +106,7 @@ then	delete
 when	matched and PlanMeals_Merge.Quantity <> SourceValues.Quantity
 then	update set Quantity = SourceValues.Quantity;
 
+select	Id = @id;
+
 commit;
 go

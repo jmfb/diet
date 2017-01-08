@@ -57,8 +57,8 @@ export interface IMeal {
 export interface IPlan {
 	id: number;
 	name: string;
-	target: INutrition;
-	meals: IMeal[];
+	target: INutrition | null;
+	meals: IMeal[] | null;
 }
 
 export interface IIngredient {
@@ -75,4 +75,5 @@ export interface IFoodOrRecipe {
 	nutrition: INutrition | null;
 	ingredients: IIngredient[];
 	recipes: number[];
+	plans: IPlan[];
 }

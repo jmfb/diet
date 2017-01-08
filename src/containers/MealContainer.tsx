@@ -22,7 +22,7 @@ interface IMealContainerState {
 }
 
 export default class MealContainer extends React.PureComponent<IMealContainerProps, IMealContainerState> {
-	constructor(props: void) {
+	constructor(props: IMealContainerProps) {
 		super(props);
 		this.state = {
 			foods: null,
@@ -42,7 +42,29 @@ export default class MealContainer extends React.PureComponent<IMealContainerPro
 		getFoods().then(foods => {
 			this.setState({ foods } as IMealContainerState);
 		});
-		getPlan(+params.id).then(plan => {
+		this.loadPlan(+params.id);
+	}
+
+	componentWillReceiveProps(nextProps: IMealContainerProps) {
+		const { id } = this.state;
+		const nextId = +nextProps.params.id;
+		if (id !== nextId) {
+			this.setState({
+				id: null,
+				name: '',
+				targetCalories: 2000,
+				targetProteinPercent: 40,
+				targetCarbohydratesPercent: 30,
+				targetFatPercent: 30,
+				meals: [],
+				submitting: false
+			} as IMealContainerState);
+			this.loadPlan(nextId);
+		}
+	}
+
+	loadPlan = (planId: number) => {
+		getPlan(planId).then(plan => {
 			const { id, name, target, meals } = plan;
 			const { protein, fat, carbohydrates } = target;
 			const targetCalories = Math.round(protein * 4 + fat * 9 + carbohydrates * 4);
@@ -108,6 +130,10 @@ export default class MealContainer extends React.PureComponent<IMealContainerPro
 		});
 	}
 
+	handleClickCancel = () => {
+		browserHistory.push('/meals');
+	}
+
 	handleClickCopy = () => {
 		this.setState({ submitting: true } as IMealContainerState);
 		const { name, targetCalories, targetProteinPercent, targetCarbohydratesPercent, targetFatPercent, meals } = this.state;
@@ -116,8 +142,8 @@ export default class MealContainer extends React.PureComponent<IMealContainerPro
 			carbohydrates: targetCalories * targetCarbohydratesPercent / 100 / 4,
 			fat: targetCalories * targetFatPercent / 100 / 9
 		};
-		updatePlan(0, `Copy of ${name}`, target, meals).then(() => {
-			browserHistory.push('/meals');
+		updatePlan(0, `Copy of ${name}`, target, meals).then(id => {
+			browserHistory.push(`/meals/${id}`);
 		});
 	}
 
@@ -160,6 +186,7 @@ export default class MealContainer extends React.PureComponent<IMealContainerPro
 				onAddMeal={this.handleAddMeal}
 				onUpdateQuantity={this.handleUpdateQuantity}
 				onClickSubmit={this.handleClickSubmit}
+				onClickCancel={this.handleClickCancel}
 				onClickCopy={this.handleClickCopy}
 				onClickDelete={this.handleClickDelete}
 				/>

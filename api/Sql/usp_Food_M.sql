@@ -94,5 +94,7 @@ then	update set
 		Fat = SourceValues.Fat,
 		Carbohydrates = SourceValues.Carbohydrates;
 
+select	Id = @id;
+
 commit;
 go

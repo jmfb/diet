@@ -83,6 +83,10 @@ export default class CreateMealContainer extends React.PureComponent<void, ICrea
 		});
 	}
 
+	handleClickCancel = () => {
+		browserHistory.push('/meals');
+	}
+
 	render() {
 		const {
 			foods,
@@ -112,6 +116,7 @@ export default class CreateMealContainer extends React.PureComponent<void, ICrea
 				onAddMeal={this.handleAddMeal}
 				onUpdateQuantity={this.handleUpdateQuantity}
 				onClickSubmit={this.handleClickSubmit}
+				onClickCancel={this.handleClickCancel}
 				/>
 		);
 	}

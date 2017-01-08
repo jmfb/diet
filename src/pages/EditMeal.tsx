@@ -22,6 +22,7 @@ interface IEditMealProps {
 	onAddMeal: (id: number) => void;
 	onUpdateQuantity: (index: number, quantity: number) => void;
 	onClickSubmit: () => void;
+	onClickCancel: () => void;
 	onClickCopy?: () => void;
 	onClickDelete?: () => void;
 }
@@ -91,6 +92,7 @@ export default class EditMeal extends React.PureComponent<IEditMealProps, void> 
 			meals,
 			submitting,
 			onClickSubmit,
+			onClickCancel,
 			onClickCopy,
 			onClickDelete
 		} = this.props;
@@ -201,9 +203,17 @@ export default class EditMeal extends React.PureComponent<IEditMealProps, void> 
 						</tr>
 					</tfoot>
 				</table>
-				{submitting ?
-					<Banner type='message' display='Submitting meal plan...' /> :
+				{submitting &&
+					<Banner type='message' display='Submitting meal plan...' />
+				}
+				{!submitting && name.length === 0 &&
+					<Banner type='error' display='Please enter a name.' />
+				}
+				{!submitting && name.length > 0 &&
 					<Button className={styles.button} type='primary' display='Submit' onClick={onClickSubmit} />
+				}
+				{!submitting &&
+					<Button className={styles.button} type='secondary' display='Cancel' onClick={onClickCancel} />
 				}
 				{!submitting && onClickCopy &&
 					<Button className={styles.button} type='secondary' display='Copy' onClick={onClickCopy} />

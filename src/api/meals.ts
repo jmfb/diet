@@ -42,7 +42,8 @@ export function updatePlan(
 		},
 		body: JSON.stringify({ id, name, target, meals })
 	})
-	.then(checkStatus);
+	.then(checkStatus)
+	.then<number>(parseJson);
 }
 
 export function deletePlan(id: number) {
@@ -100,7 +101,8 @@ export function updateFood(
 		},
 		body: JSON.stringify({ id, name, unitSize, unitMeasure, siteUrl, nutrition })
 	})
-	.then(checkStatus);
+	.then(checkStatus)
+	.then<number>(parseJson);
 }
 
 export function updateRecipe(
@@ -120,7 +122,8 @@ export function updateRecipe(
 		},
 		body: JSON.stringify({ id, name, unitSize, unitMeasure, siteUrl, ingredients })
 	})
-	.then(checkStatus);
+	.then(checkStatus)
+	.then<number>(parseJson);
 }
 
 export function deleteFood(id: number) {

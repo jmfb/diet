@@ -25,6 +25,7 @@ interface IEditRecipeProps {
 	onUpdateQuantity: (index: number, quantity: number) => void;
 	onClickSubmit: () => void;
 	onClickCancel: () => void;
+	onClickCopy?: () => void;
 	onClickDelete?: () => void;
 }
 
@@ -86,6 +87,7 @@ export default class EditRecipe extends React.PureComponent<IEditRecipeProps, vo
 			submitting,
 			onClickSubmit,
 			onClickCancel,
+			onClickCopy,
 			onClickDelete
 		} = this.props;
 
@@ -209,6 +211,9 @@ export default class EditRecipe extends React.PureComponent<IEditRecipeProps, vo
 				}
 				{!submitting &&
 					<Button className={styles.button} type='secondary' display='Cancel' onClick={onClickCancel} />
+				}
+				{!submitting && onClickCopy &&
+					<Button className={styles.button} type='secondary' display='Copy' onClick={onClickCopy} />
 				}
 				{!submitting && recipes.length === 0 && onClickDelete &&
 					<Button className={styles.button} type='danger' display='Delete' onClick={onClickDelete} />

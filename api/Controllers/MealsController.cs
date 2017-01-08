@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using DietApi.Models;
@@ -21,9 +20,9 @@ namespace DietApi.Controllers
 		}
 
 		[HttpPost]
-		public virtual void UpdatePlan([FromBody]PlanModel plan)
+		public virtual int UpdatePlan([FromBody]PlanModel plan)
 		{
-			DataBridge.UpdatePlan(UserId, plan);
+			return DataBridge.UpdatePlan(UserId, plan);
 		}
 
 		[HttpDelete]
@@ -45,15 +44,15 @@ namespace DietApi.Controllers
 		}
 
 		[HttpPost]
-		public virtual void UpdateFood([FromBody]FoodModel food)
+		public virtual int UpdateFood([FromBody]FoodModel food)
 		{
-			DataBridge.UpdateFood(UserId, food);
+			return DataBridge.UpdateFood(UserId, food);
 		}
 
 		[HttpPost]
-		public virtual void UpdateRecipe([FromBody]RecipeModel recipe)
+		public virtual int UpdateRecipe([FromBody]RecipeModel recipe)
 		{
-			DataBridge.UpdateRecipe(UserId, recipe);
+			return DataBridge.UpdateRecipe(UserId, recipe);
 		}
 
 		[HttpDelete]
