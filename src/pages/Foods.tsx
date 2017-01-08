@@ -8,13 +8,20 @@ import * as styles from './Foods.scss';
 
 interface IFoodsProps {
 	foods: IFood[] | null;
+	filter: string;
 	onClickCreateFood: () => void;
 	onClickCreateRecipe: () => void;
+	onUpdateFilter: (filter: string) => void;
 }
 
 export default class Foods extends React.PureComponent<IFoodsProps, void> {
+	handleChangeFilter = (e: React.FormEvent<HTMLInputElement>) => {
+		const { onUpdateFilter } = this.props;
+		onUpdateFilter(e.currentTarget.value);
+	}
+
 	render() {
-		const { foods, onClickCreateFood, onClickCreateRecipe } = this.props;
+		const { foods, filter, onClickCreateFood, onClickCreateRecipe } = this.props;
 		return (
 			<div className={styles.root}>
 				<MealsMenu />
@@ -22,6 +29,14 @@ export default class Foods extends React.PureComponent<IFoodsProps, void> {
 				<div className={styles.buttonGroup}>
 					<Button className={styles.button} type='primary' display='Create Food' onClick={onClickCreateFood} />
 					<Button className={styles.button} type='secondary' display='Create Recipe' onClick={onClickCreateRecipe} />
+				</div>
+				<div>
+					<input
+						className={styles.search}
+						type='text'
+						value={filter}
+						onChange={this.handleChangeFilter}
+						placeholder='Search for a food item...' />
 				</div>
 				{foods === null ?
 					<Banner type='message' display='Loading foods...' /> :

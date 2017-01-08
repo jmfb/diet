@@ -6,17 +6,21 @@ import { getFoods } from '~/api/meals';
 
 interface IFoodsContainerState {
 	foods: IFood[] | null;
+	filter: string;
 }
 
 export default class FoodsContainer extends React.PureComponent<void, IFoodsContainerState> {
 	constructor(props: void) {
 		super(props);
-		this.state = { foods: null };
+		this.state = {
+			foods: null,
+			filter: ''
+		};
 	}
 
 	componentDidMount() {
 		getFoods().then(foods => {
-			this.setState({ foods });
+			this.setState({ foods } as IFoodsContainerState);
 		});
 	}
 
@@ -28,13 +32,22 @@ export default class FoodsContainer extends React.PureComponent<void, IFoodsCont
 		browserHistory.push('/meals/foods/new-recipe');
 	}
 
+	handleUpdateFilter = (filter: string) => {
+		this.setState({ filter } as IFoodsContainerState);
+	}
+
 	render() {
-		const { foods } = this.state;
+		const { foods, filter } = this.state;
+		const filteredFoods = foods === null ?
+			null :
+			foods.filter(food => filter === '' || food.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0);
 		return (
 			<Foods
-				{...{foods}}
+				{...{filter}}
+				foods={filteredFoods}
 				onClickCreateFood={this.handleCreateFood}
 				onClickCreateRecipe={this.handleCreateRecipe}
+				onUpdateFilter={this.handleUpdateFilter}
 				/>
 		);
 	}
