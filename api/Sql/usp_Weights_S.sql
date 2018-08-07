@@ -16,11 +16,24 @@ set nocount on;
 exec Diet.Diet.usp_Weights_S 1, '2010-11-20', '2016-01-01';
 */
 
-select	[When],
-	WeightInPounds
-from	Diet.Diet.Weights
-where	UserId = @userId
-and	[When] >= convert(date, @startDate)
-and	[When] < convert(date, @endDateExclusive)
-order by [When] asc;
+select	Weights.[When],
+	round(avg(WeightsDaysBack.WeightInPounds), 1) as WeightInPounds
+from	Diet.Diet.Weights as Weights
+	cross apply (
+		select 0 as [Value]
+		union all select 1 as [Value]
+		union all select 2 as [Value]
+		union all select 3 as [Value]
+		union all select 4 as [Value]
+		union all select 5 as [Value]
+		union all select 6 as [Value]
+	) as DaysBack
+	inner join Diet.Diet.Weights as WeightsDaysBack
+	on	WeightsDaysBack.UserId = Weights.UserId
+	and	WeightsDaysBack.[When] = dateadd(day, -DaysBack.[Value], Weights.[When])
+where	Weights.UserId = @userId
+and	Weights.[When] >= convert(date, @startDate)
+and	Weights.[When] < convert(date, @endDateExclusive)
+group by Weights.[When]
+order by Weights.[When] asc;
 go
