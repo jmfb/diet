@@ -7,17 +7,22 @@ create procedure Diet.usp_Weights_S
 (
 	@userId int,
 	@startDate char(10),
-	@endDateExclusive char(10)
+	@endDateExclusive char(10),
+	@average bit = 0
 )
 as
 set nocount on;
 
 /*
 exec Diet.Diet.usp_Weights_S 1, '2010-11-20', '2016-01-01';
+exec Diet.Diet.usp_Weights_S 1, '2010-11-20', '2016-01-01', 1;
 */
 
 select	Weights.[When],
-	round(avg(WeightsDaysBack.WeightInPounds), 1) as WeightInPounds
+	case when @average = 1
+		then round(avg(WeightsDaysBack.WeightInPounds), 1)
+		else Weights.WeightInPounds
+	end as WeightInPounds
 from	Diet.Diet.Weights as Weights
 	cross apply (
 		select 0 as [Value]
@@ -34,6 +39,7 @@ from	Diet.Diet.Weights as Weights
 where	Weights.UserId = @userId
 and	Weights.[When] >= convert(date, @startDate)
 and	Weights.[When] < convert(date, @endDateExclusive)
-group by Weights.[When]
+group by Weights.[When],
+	Weights.WeightInPounds
 order by Weights.[When] asc;
 go
