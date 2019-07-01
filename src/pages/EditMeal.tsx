@@ -27,7 +27,7 @@ interface IEditMealProps {
 	onClickDelete?: () => void;
 }
 
-export default class EditMeal extends React.PureComponent<IEditMealProps, void> {
+export default class EditMeal extends React.PureComponent<IEditMealProps> {
 	handleChangeName = (e: React.FormEvent<HTMLInputElement>) => {
 		const { onUpdateName } = this.props;
 		onUpdateName(e.currentTarget.value);

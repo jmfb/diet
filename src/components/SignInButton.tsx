@@ -9,7 +9,7 @@ interface ISignInButtonProps {
 	onClick: () => void;
 }
 
-export default class SignInButton extends React.PureComponent<ISignInButtonProps, void> {
+export default class SignInButton extends React.PureComponent<ISignInButtonProps> {
 	render() {
 		const { disabled, style, className, onClick } = this.props;
 		return (

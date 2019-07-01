@@ -29,7 +29,7 @@ interface IEditRecipeProps {
 	onClickDelete?: () => void;
 }
 
-export default class EditRecipe extends React.PureComponent<IEditRecipeProps, void> {
+export default class EditRecipe extends React.PureComponent<IEditRecipeProps> {
 	handleChangeName = (e: React.FormEvent<HTMLInputElement>) => {
 		const { onUpdateName } = this.props;
 		onUpdateName(e.currentTarget.value);

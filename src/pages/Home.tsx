@@ -17,7 +17,7 @@ interface IHomeProps {
 	onClickLogout: () => void;
 }
 
-export default class Home extends React.PureComponent<IHomeProps, void> {
+export default class Home extends React.PureComponent<IHomeProps> {
 	render() {
 		const { name, profile, lifetime, last30days, last7days, onClickProfile, onClickLogout } = this.props;
 		const targetWeightInPounds = profile === null ? null : profile.targetWeightInPounds;

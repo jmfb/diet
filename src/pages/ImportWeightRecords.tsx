@@ -13,7 +13,7 @@ interface IImportWeightRecordsProps {
 	onClickSubmit: () => void;
 }
 
-export default class ImportWeightRecords extends React.PureComponent<IImportWeightRecordsProps, void> {
+export default class ImportWeightRecords extends React.PureComponent<IImportWeightRecordsProps> {
 	handleChooseFile = (e: React.FormEvent<HTMLInputElement>) => {
 		const { files } = e.currentTarget;
 		const { onChooseFile } = this.props;

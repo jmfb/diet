@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import Weight from '~/pages/Weight';
 import { IWeightRecord } from '~/models';
 import { getRecentWeights } from '~/api/weight';
@@ -10,8 +11,8 @@ interface IWeightContainerState {
 	loading: boolean;
 }
 
-export default class WeightContainer extends React.PureComponent<void, IWeightContainerState> {
-	constructor(props: void) {
+class WeightContainer extends React.PureComponent<RouteComponentProps, IWeightContainerState> {
+	constructor(props: RouteComponentProps) {
 		super(props);
 		this.state = {
 			weights: [],
@@ -31,11 +32,13 @@ export default class WeightContainer extends React.PureComponent<void, IWeightCo
 	}
 
 	handleClickAdd = () => {
-		browserHistory.push('/weight/add');
+		const { history } = this.props;
+		history.push('/weight/add');
 	}
 
 	handleClickImport = () => {
-		browserHistory.push('/weight/import');
+		const { history } = this.props;
+		history.push('/weight/import');
 	}
 
 	handleClickLoadMore = () => {
@@ -62,3 +65,5 @@ export default class WeightContainer extends React.PureComponent<void, IWeightCo
 		);
 	}
 }
+
+export default withRouter(WeightContainer);

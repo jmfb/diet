@@ -14,7 +14,7 @@ interface IFoodsProps {
 	onUpdateFilter: (filter: string) => void;
 }
 
-export default class Foods extends React.PureComponent<IFoodsProps, void> {
+export default class Foods extends React.PureComponent<IFoodsProps> {
 	handleChangeFilter = (e: React.FormEvent<HTMLInputElement>) => {
 		const { onUpdateFilter } = this.props;
 		onUpdateFilter(e.currentTarget.value);

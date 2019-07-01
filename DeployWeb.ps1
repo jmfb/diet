@@ -2,12 +2,14 @@ param (
 	[string]$ftpPassword = $( Read-Host "Ftp password" )
 )
 
-Write-Host "Replacing cache busting version in index.html..."
-$contents = Get-Content .\deploy\wwwroot\index.html
-$newContents = $contents | ForEach-Object { $_ -replace '\?v=\d+', ('?v={0:yyyyMMddHHmmss}' -f (Get-Date)) }
-$newContents | Set-Content .\deploy\wwwroot\index.html
+$ErrorActionPreference = "Stop"
 
 try {
+	Write-Host "Replacing cache busting version in index.html..."
+	$contents = Get-Content .\deploy\wwwroot\index.html
+	$newContents = $contents | ForEach-Object { $_ -replace '\?v=\d+', ('?v={0:yyyyMMddHHmmss}' -f (Get-Date)) }
+	$newContents | Set-Content .\deploy\wwwroot\index.html
+
 	Add-Type -Path "C:\Program Files (x86)\WinSCP\WinSCPnet.dll"
 	$sessionOptions = New-Object WinSCP.SessionOptions -Property @{
 		Protocol = [WinSCP.Protocol]::Ftp

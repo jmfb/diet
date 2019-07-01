@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import Home from '~/pages/Home';
 import { IProfile, IWeightRecord } from '~/models';
 import { getProfile } from '~/api/profiles';
@@ -13,8 +14,8 @@ interface IHomeContainerState {
 	last7days: IWeightRecord[] | null;
 }
 
-export default class HomeContainer extends React.PureComponent<void, IHomeContainerState> {
-	constructor(props: void) {
+class HomeContainer extends React.PureComponent<RouteComponentProps, IHomeContainerState> {
+	constructor(props: RouteComponentProps) {
 		super(props);
 		this.state = {
 			profile: null,
@@ -40,13 +41,15 @@ export default class HomeContainer extends React.PureComponent<void, IHomeContai
 	}
 
 	handleClickProfile = () => {
-		browserHistory.push('/profile');
+		const { history } = this.props;
+		history.push('/profile');
 	}
 
 	handleClickLogout = () => {
+		const { history } = this.props;
 		localStorage.removeItem('token');
 		localStorage.removeItem('name');
-		browserHistory.push('/login');
+		history.push('/login');
 	}
 
 	render() {
@@ -60,3 +63,5 @@ export default class HomeContainer extends React.PureComponent<void, IHomeContai
 		);
 	}
 }
+
+export default withRouter(HomeContainer);

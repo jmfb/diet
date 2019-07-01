@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import EditRecipe from '~/pages/EditRecipe';
 import { IIngredient, IFood } from '~/models';
 import { getFoods, updateRecipe } from '~/api/meals';
@@ -14,8 +15,8 @@ interface ICreateRecipeContainerState {
 	submitting: boolean;
 }
 
-export default class CreateRecipeContainer extends React.PureComponent<void, ICreateRecipeContainerState> {
-	constructor(props: void) {
+class CreateRecipeContainer extends React.PureComponent<RouteComponentProps, ICreateRecipeContainerState> {
+	constructor(props: RouteComponentProps) {
 		super(props);
 		this.state = {
 			foods: [],
@@ -69,15 +70,17 @@ export default class CreateRecipeContainer extends React.PureComponent<void, ICr
 	}
 
 	handleClickSubmit = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as ICreateRecipeContainerState);
 		const { name, unitSize, unitMeasure, siteUrl, ingredients } = this.state;
 		updateRecipe(0, name, unitSize, unitMeasure, siteUrl, ingredients).then(() => {
-			browserHistory.push('/meals/foods');
+			history.push('/meals/foods');
 		});
 	}
 
 	handleClickCancel = () => {
-		browserHistory.push('/meals/foods');
+		const { history } = this.props;
+		history.push('/meals/foods');
 	}
 
 	render() {
@@ -99,3 +102,5 @@ export default class CreateRecipeContainer extends React.PureComponent<void, ICr
 		);
 	}
 }
+
+export default withRouter(CreateRecipeContainer);

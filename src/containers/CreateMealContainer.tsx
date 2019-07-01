@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import EditMeal from '~/pages/EditMeal';
 import { IFood, IMeal } from '~/models';
 import { updatePlan, getFoods } from '~/api/meals';
@@ -15,8 +16,8 @@ interface ICreateMealContainerState {
 	submitting: boolean;
 }
 
-export default class CreateMealContainer extends React.PureComponent<void, ICreateMealContainerState> {
-	constructor(props: void) {
+class CreateMealContainer extends React.PureComponent<RouteComponentProps, ICreateMealContainerState> {
+	constructor(props: RouteComponentProps) {
 		super(props);
 		this.state = {
 			foods: [],
@@ -71,6 +72,7 @@ export default class CreateMealContainer extends React.PureComponent<void, ICrea
 	}
 
 	handleClickSubmit = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as ICreateMealContainerState);
 		const { name, targetCalories, targetProteinPercent, targetCarbohydratesPercent, targetFatPercent, meals } = this.state;
 		const target = {
@@ -79,12 +81,13 @@ export default class CreateMealContainer extends React.PureComponent<void, ICrea
 			fat: targetCalories * targetFatPercent / 100 / 9
 		};
 		updatePlan(0, name, target, meals).then(() => {
-			browserHistory.push('/meals');
+			history.push('/meals');
 		});
 	}
 
 	handleClickCancel = () => {
-		browserHistory.push('/meals');
+		const { history } = this.props;
+		history.push('/meals');
 	}
 
 	render() {
@@ -121,3 +124,5 @@ export default class CreateMealContainer extends React.PureComponent<void, ICrea
 		);
 	}
 }
+
+export default withRouter(CreateMealContainer);

@@ -5,11 +5,11 @@ import * as styles from './ErrorView.scss';
 interface IErrorViewProps {
 	status: number;
 	statusText: string;
-	error: any;
+	error: string;
 	onClickLogout: () => void;
 }
 
-export default class ErrorView extends React.PureComponent<IErrorViewProps, void> {
+export default class ErrorView extends React.PureComponent<IErrorViewProps> {
 	render() {
 		const { status, statusText, onClickLogout } = this.props;
 		return (
@@ -41,26 +41,43 @@ export default class ErrorView extends React.PureComponent<IErrorViewProps, void
 
 	renderInternalServerError = () => {
 		const { error } = this.props;
-		const { Message, ExceptionMessage, ExceptionType, StackTrace } = error;
-		return (
-			<div className={styles.container}>
-				<div className={styles.message}>{Message}</div>
-				<div className={styles.exceptionType}>{ExceptionType}</div>
-				<div className={styles.exceptionMessage}>{ExceptionMessage}</div>
-				<div className={styles.stackTrace}>{StackTrace}</div>
-			</div>
-		);
+		try {
+			const { Message, ExceptionMessage, ExceptionType, StackTrace } = JSON.parse(error);
+			return (
+				<div className={styles.container}>
+					<div className={styles.message}>{Message}</div>
+					<div className={styles.exceptionType}>{ExceptionType}</div>
+					<div className={styles.exceptionMessage}>{ExceptionMessage}</div>
+					<div className={styles.stackTrace}>{StackTrace}</div>
+				</div>
+			);
+		} catch (exception) {
+			return (
+				<div className={styles.container}>
+					<div className={styles.exceptionMessage}>{error}</div>
+				</div>
+			);
+		}
 	}
 
 	renderUnauthorized = () => {
 		const { error } = this.props;
-		const { Message } = error;
-		return (
-			<div className={styles.container}>
-				<div className={styles.message}>Unauthorized</div>
-				<div className={styles.exceptionMessage}>{Message || error}</div>
-			</div>
-		);
+		try {
+			const { Message } = JSON.parse(error);
+			return (
+				<div className={styles.container}>
+					<div className={styles.message}>Unauthorized</div>
+					<div className={styles.exceptionMessage}>{Message || error}</div>
+				</div>
+			);
+		} catch (exception) {
+			return (
+				<div className={styles.container}>
+					<div className={styles.message}>Unauthorized</div>
+					<div className={styles.exceptionMessage}>{error}</div>
+				</div>
+			);
+		}
 	}
 
 	renderUnknownError = () => {
@@ -68,7 +85,7 @@ export default class ErrorView extends React.PureComponent<IErrorViewProps, void
 		return (
 			<div className={styles.container}>
 				<div className={styles.message}>Unknown Error</div>
-				<div className={styles.exceptionMessage}>{JSON.stringify(error)}</div>
+				<div className={styles.exceptionMessage}>{error}</div>
 			</div>
 		);
 	}

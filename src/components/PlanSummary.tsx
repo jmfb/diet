@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import Card from './Card';
 import { IPlanSummary } from '~/models';
 import * as styles from './PlanSummary.scss';
@@ -8,7 +8,7 @@ interface IPlanSummaryProps {
 	plan: IPlanSummary;
 }
 
-export default class PlanSummary extends React.PureComponent<IPlanSummaryProps, void> {
+export default class PlanSummary extends React.PureComponent<IPlanSummaryProps> {
 	render() {
 		const { plan } = this.props;
 		const { target, actual } = plan;

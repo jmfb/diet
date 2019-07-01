@@ -20,7 +20,7 @@ interface IProfileProps {
 	onClickSubmit: () => void;
 }
 
-export default class Profile extends React.PureComponent<IProfileProps, void> {
+export default class Profile extends React.PureComponent<IProfileProps> {
 	handleChangeGender = (genderId: number) => {
 		return () => {
 			const { onUpdateGender } = this.props;

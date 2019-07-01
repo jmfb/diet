@@ -1,19 +1,22 @@
 import * as React from 'react';
-import { IndexLink, Link } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps, NavLink } from 'react-router-dom';
 import * as styles from './NavBar.scss';
 
-export default class NavBar extends React.PureComponent<void, void> {
+class NavBar extends React.Component<RouteComponentProps> {
 	render() {
 		return(
 			<header>
 				<nav>
 					<ul className={styles.header}>
-						<li><IndexLink to='/' activeClassName={styles.active}>Home</IndexLink></li>
-						<li><Link to='/weight' activeClassName={styles.active}>Weight</Link></li>
-						<li><Link to='/meals' activeClassName={styles.active}>Meals</Link></li>
+						<li><NavLink exact to='/' activeClassName={styles.active}>Home</NavLink></li>
+						<li><NavLink to='/weight' activeClassName={styles.active}>Weight</NavLink></li>
+						<li><NavLink to='/meals' activeClassName={styles.active}>Meals</NavLink></li>
 					</ul>
 				</nav>
 			</header>
 		);
 	}
-};
+}
+
+export default withRouter(NavBar);

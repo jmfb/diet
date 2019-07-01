@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { IndexLink, Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import * as styles from './MealsMenu.scss';
 
-export default class MealsMenu extends React.PureComponent<void, void> {
+export default class MealsMenu extends React.PureComponent {
 	render() {
 		return (
 			<ul className={styles.root}>
-				<li><IndexLink to='/meals' activeClassName={styles.active}>Meals</IndexLink></li>
-				<li><Link to={`/meals/foods`} activeClassName={styles.active}>Foods</Link></li>
+				<li><NavLink exact to='/meals' activeClassName={styles.active}>Meals</NavLink></li>
+				<li><NavLink to='/meals/foods' activeClassName={styles.active}>Foods</NavLink></li>
 			</ul>
 		);
 	}
