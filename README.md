@@ -2,9 +2,13 @@
 
 ## Local Machine Requirements
 
+- IIS 10
+- URL Rewrite 2.1
+- SQL Server 2017 Developer Edition
+- SSMS 18.1
 - Visual Studio 2017
-- Node v12.*
-- NPM v6.9.*
+- Node v12.5.0
+- NPM v6.9.0
 
 ## Local Development Steps - Full Stack
 

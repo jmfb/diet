@@ -20,11 +20,11 @@ namespace DietApi.Controllers
 		{
 			var googleToken = await AuthenticationService.GetGoogleToken(redirectUrl, authorizationCode);
 			var userInfo = await AuthenticationService.GetUserInfo(googleToken.TokenType, googleToken.AccessToken);
-			var userId = DataBridge.UpdateAccount(userInfo.Email, userInfo.Name);
+			var userId = DataBridge.UpdateAccount(userInfo.Email, userInfo.Id);
 			return new LoginModel
 			{
 				Token = AuthenticationService.CreateAuthorizationToken(userId),
-				Name = userInfo.Name
+				Name = userInfo.Id
 			};
 		}
 	}
