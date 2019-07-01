@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { RouteComponentProps, NavLink } from 'react-router-dom';
 import * as styles from './NavBar.scss';
 
-export default class NavBar extends React.PureComponent {
+class NavBar extends React.Component<RouteComponentProps> {
 	render() {
 		return(
 			<header>
@@ -17,3 +18,5 @@ export default class NavBar extends React.PureComponent {
 		);
 	}
 }
+
+export default withRouter(NavBar);

@@ -5,7 +5,7 @@ import { History } from 'history';
 
 export let browserHistory: History = null;
 
-class Application extends React.PureComponent<RouteComponentProps> {
+class Application extends React.Component<RouteComponentProps> {
 	componentWillMount() {
 		const { history } = this.props;
 		browserHistory = history;

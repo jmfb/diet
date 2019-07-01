@@ -1,13 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
-function cssConfig(modules) {
-	return {
-		localIdentName: '[name]_[local]_[hash:base64:3]',
-		modules
-	};
-}
-
 module.exports = {
 	mode: 'production',
 	entry: [
@@ -21,10 +14,8 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 
-	devtool: 'source-map',
-
 	resolve: {
-		modules: [path.resolve(__dirname, 'node_modules')],
+		modules: ['node_modules'],
 		alias: {
 			'~': path.resolve(__dirname, 'src')
 		},
@@ -32,16 +23,11 @@ module.exports = {
 	},
 
 	resolveLoader: {
-		modules: [path.resolve(__dirname, 'node_modules')]
+		modules: ['node_modules']
 	},
 
 	module: {
 		rules: [
-			{
-				test: /\.js$/,
-				loader: 'source-map-loader',
-				enforce: 'pre'
-			},
 			{
 				test: /\.tsx?$/,
 				include: [path.resolve(__dirname, 'src')],
@@ -57,18 +43,8 @@ module.exports = {
 				test: /\.css$/,
 				include: [path.resolve(__dirname, 'node_modules')],
 				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-						options: {
-							hmr: false
-						}
-					},
-					{
-						loader: 'css-loader',
-						options: {
-							importLoaders: 1
-						}
-					},
+					MiniCssExtractPlugin.loader,
+					'css-loader',
 					'postcss-loader'
 				]
 			},
@@ -76,16 +52,10 @@ module.exports = {
 				test: /\.scss$/,
 				include: [path.resolve(__dirname, 'src')],
 				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-						options: {
-							hmr: false
-						}
-					},
+					MiniCssExtractPlugin.loader,
 					{
 						loader: 'css-loader',
 						options: {
-							importLoaders: 2,
 							modules: {
 								localIdentName: '[name]_[local]_[hash:base64:3]'
 							}
@@ -105,12 +75,12 @@ module.exports = {
 	stats: {
 		all: false,
 		modules: true,
-		maxModules: 0,
 		assets: true,
 		errors: true,
 		warnings: true,
 		moduleTrace: true,
-		errorDetails: true
+		errorDetails: true,
+		timings: true
 	},
 
 	plugins: [
