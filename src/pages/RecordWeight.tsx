@@ -12,7 +12,7 @@ interface IRecordWeightProps {
 	onClickDelete?: () => void;
 }
 
-export default class RecordWeight extends React.PureComponent<IRecordWeightProps, void> {
+export default class RecordWeight extends React.PureComponent<IRecordWeightProps> {
 	handleChange = (e: React.FormEvent<HTMLInputElement>) => {
 		const { onUpdateWeight } = this.props;
 		onUpdateWeight(e.currentTarget.value);

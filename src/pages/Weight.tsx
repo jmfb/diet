@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Banner from '~/components/Banner';
@@ -15,7 +15,7 @@ interface IWeightProps {
 	onClickLoadMore: () => void;
 }
 
-export default class Weight extends React.PureComponent<IWeightProps, void> {
+export default class Weight extends React.PureComponent<IWeightProps> {
 	render() {
 		const { weights, moreWeights, loading, onClickAdd, onClickImport, onClickLoadMore } = this.props;
 		return (

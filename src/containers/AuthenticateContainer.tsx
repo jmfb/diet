@@ -1,17 +1,19 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import Banner from '~/components/Banner';
 import { login } from '~/api/auth';
 import * as queryString from 'query-string';
 
-export default class AuthenticateContainer extends React.PureComponent<void, void> {
+class AuthenticateContainer extends React.PureComponent<RouteComponentProps> {
 	componentDidMount() {
-		const { code } = queryString.parse(location.search);
-		browserHistory.replace('/authenticate');
+		const { history } = this.props;
+		const { code } = queryString.parse(location.search) as { code: string };
+		history.replace('/authenticate');
 		login(code).then(loginModel => {
 			localStorage.setItem('token', loginModel.token);
 			localStorage.setItem('name', loginModel.name);
-			browserHistory.push('/');
+			history.push('/');
 		});
 	}
 
@@ -27,3 +29,5 @@ export default class AuthenticateContainer extends React.PureComponent<void, voi
 		);
 	}
 }
+
+export default withRouter(AuthenticateContainer);

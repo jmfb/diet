@@ -8,7 +8,7 @@ interface ILoginProps {
 	onClickSignIn: () => void;
 }
 
-export default class Login extends React.PureComponent<ILoginProps, void> {
+export default class Login extends React.PureComponent<ILoginProps> {
 	render() {
 		const { signingIn, onClickSignIn } = this.props;
 		return (

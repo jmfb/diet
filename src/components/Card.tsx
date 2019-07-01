@@ -6,7 +6,7 @@ interface ICardProps {
 	className?: string;
 }
 
-export default class Card extends React.PureComponent<ICardProps, void> {
+export default class Card extends React.PureComponent<ICardProps> {
 	render() {
 		const { className } = this.props;
 		return (

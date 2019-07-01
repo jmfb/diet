@@ -11,7 +11,7 @@ interface IWeightGraphProps {
 	weightRecords: IWeightRecord[];
 }
 
-export default class WeightGraph extends React.PureComponent<IWeightGraphProps, void> {
+export default class WeightGraph extends React.PureComponent<IWeightGraphProps> {
 	private rootNode: SVGElement;
 
 	componentWillUpdate() {

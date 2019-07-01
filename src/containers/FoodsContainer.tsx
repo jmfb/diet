@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import Foods from '~/pages/Foods';
 import { IFood } from '~/models';
 import { getFoods } from '~/api/meals';
@@ -9,8 +10,8 @@ interface IFoodsContainerState {
 	filter: string;
 }
 
-export default class FoodsContainer extends React.PureComponent<void, IFoodsContainerState> {
-	constructor(props: void) {
+class FoodsContainer extends React.PureComponent<RouteComponentProps, IFoodsContainerState> {
+	constructor(props: RouteComponentProps) {
 		super(props);
 		this.state = {
 			foods: null,
@@ -25,11 +26,13 @@ export default class FoodsContainer extends React.PureComponent<void, IFoodsCont
 	}
 
 	handleCreateFood = () => {
-		browserHistory.push('/meals/foods/new-food');
+		const { history } = this.props;
+		history.push('/meals/foods/new-food');
 	}
 
 	handleCreateRecipe = () => {
-		browserHistory.push('/meals/foods/new-recipe');
+		const { history } = this.props;
+		history.push('/meals/foods/new-recipe');
 	}
 
 	handleUpdateFilter = (filter: string) => {
@@ -52,3 +55,5 @@ export default class FoodsContainer extends React.PureComponent<void, IFoodsCont
 		);
 	}
 }
+
+export default withRouter(FoodsContainer);

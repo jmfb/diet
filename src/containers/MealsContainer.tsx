@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import Meals from '~/pages/Meals';
 import { IPlanSummary } from '~/models';
 import { getPlans } from '~/api/meals';
@@ -8,8 +9,8 @@ interface IMealsContainerState {
 	plans: IPlanSummary[] | null;
 }
 
-export default class MealsContainer extends React.PureComponent<void, IMealsContainerState> {
-	constructor(props: void) {
+class MealsContainer extends React.PureComponent<RouteComponentProps, IMealsContainerState> {
+	constructor(props: RouteComponentProps) {
 		super(props);
 		this.state = { plans: null };
 	}
@@ -21,7 +22,8 @@ export default class MealsContainer extends React.PureComponent<void, IMealsCont
 	}
 
 	handleClickCreatePlan = () => {
-		browserHistory.push('/meals/new');
+		const { history } = this.props;
+		history.push('/meals/new');
 	}
 
 	render() {
@@ -33,3 +35,5 @@ export default class MealsContainer extends React.PureComponent<void, IMealsCont
 		);
 	}
 }
+
+export default withRouter(MealsContainer);

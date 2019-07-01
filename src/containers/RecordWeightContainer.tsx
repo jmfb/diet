@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import RecordWeight from '~/pages/RecordWeight';
 import { updateWeight } from '~/api/weight';
 import * as moment from 'moment';
@@ -9,8 +10,8 @@ interface IRecordWeightContainerState {
 	submitting: boolean;
 }
 
-export default class RecordWeightContainer extends React.PureComponent<void, IRecordWeightContainerState> {
-	constructor(props: void) {
+class RecordWeightContainer extends React.PureComponent<RouteComponentProps, IRecordWeightContainerState> {
+	constructor(props: RouteComponentProps) {
 		super(props);
 		this.state = {
 			submitting: false,
@@ -23,10 +24,11 @@ export default class RecordWeightContainer extends React.PureComponent<void, IRe
 	}
 
 	handleClickSubmit = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IRecordWeightContainerState);
 		const { weightInPounds } = this.state;
 		updateWeight(moment().format('YYYY-MM-DD'), +weightInPounds).then(() => {
-			browserHistory.push('/');
+			history.push('/');
 		});
 	}
 
@@ -40,3 +42,5 @@ export default class RecordWeightContainer extends React.PureComponent<void, IRe
 		);
 	}
 }
+
+export default withRouter(RecordWeightContainer);

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import Card from './Card';
 import { IFood } from '~/models';
 import * as pluralize from 'pluralize';
@@ -9,7 +9,7 @@ interface IFoodProps {
 	food: IFood;
 }
 
-export default class Food extends React.PureComponent<IFoodProps, void> {
+export default class Food extends React.PureComponent<IFoodProps> {
 	render() {
 		const { food } = this.props;
 		const { id, name, unitSize, unitMeasure, siteUrl, nutrition } = food;

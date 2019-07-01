@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import Banner from '~/components/Banner';
 import EditMeal from '~/pages/EditMeal';
 import { IFood, IMeal } from '~/models';
 import { getFoods, getPlan, updatePlan, deletePlan } from '~/api/meals';
 
-interface IMealContainerProps {
-	params: { id: string; };
+interface IParams {
+	id: string;
 }
+
+type IMealContainerProps = RouteComponentProps<IParams>;
 
 interface IMealContainerState {
 	foods: IFood[] | null;
@@ -21,7 +24,7 @@ interface IMealContainerState {
 	submitting: boolean;
 }
 
-export default class MealContainer extends React.PureComponent<IMealContainerProps, IMealContainerState> {
+class MealContainer extends React.PureComponent<IMealContainerProps, IMealContainerState> {
 	constructor(props: IMealContainerProps) {
 		super(props);
 		this.state = {
@@ -38,7 +41,8 @@ export default class MealContainer extends React.PureComponent<IMealContainerPro
 	}
 
 	componentDidMount() {
-		const { params } = this.props;
+		const { match } = this.props;
+		const { params } = match;
 		getFoods().then(foods => {
 			this.setState({ foods } as IMealContainerState);
 		});
@@ -47,7 +51,7 @@ export default class MealContainer extends React.PureComponent<IMealContainerPro
 
 	componentWillReceiveProps(nextProps: IMealContainerProps) {
 		const { id } = this.state;
-		const nextId = +nextProps.params.id;
+		const nextId = +nextProps.match.params.id;
 		if (id !== nextId) {
 			this.setState({
 				id: null,
@@ -118,6 +122,7 @@ export default class MealContainer extends React.PureComponent<IMealContainerPro
 	}
 
 	handleClickSubmit = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IMealContainerState);
 		const { id, name, targetCalories, targetProteinPercent, targetCarbohydratesPercent, targetFatPercent, meals } = this.state;
 		const target = {
@@ -126,15 +131,17 @@ export default class MealContainer extends React.PureComponent<IMealContainerPro
 			fat: targetCalories * targetFatPercent / 100 / 9
 		};
 		updatePlan(id, name, target, meals).then(() => {
-			browserHistory.push('/meals');
+			history.push('/meals');
 		});
 	}
 
 	handleClickCancel = () => {
-		browserHistory.push('/meals');
+		const { history } = this.props;
+		history.push('/meals');
 	}
 
 	handleClickCopy = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IMealContainerState);
 		const { name, targetCalories, targetProteinPercent, targetCarbohydratesPercent, targetFatPercent, meals } = this.state;
 		const target = {
@@ -143,15 +150,16 @@ export default class MealContainer extends React.PureComponent<IMealContainerPro
 			fat: targetCalories * targetFatPercent / 100 / 9
 		};
 		updatePlan(0, `Copy of ${name}`, target, meals).then(id => {
-			browserHistory.push(`/meals/${id}`);
+			history.push(`/meals/${id}`);
 		});
 	}
 
 	handleClickDelete = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IMealContainerState);
 		const { id } = this.state;
 		deletePlan(id).then(() => {
-			browserHistory.push('/meals');
+			history.push('/meals');
 		});
 	}
 
@@ -193,3 +201,5 @@ export default class MealContainer extends React.PureComponent<IMealContainerPro
 		);
 	}
 }
+
+export default withRouter(MealContainer);

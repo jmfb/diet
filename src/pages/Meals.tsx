@@ -11,7 +11,7 @@ interface IMealsProps {
 	onClickCreatePlan: () => void;
 }
 
-export default class Meals extends React.PureComponent<IMealsProps, void> {
+export default class Meals extends React.PureComponent<IMealsProps> {
 	render() {
 		const { plans, onClickCreatePlan } = this.props;
 		return (

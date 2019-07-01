@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import RecordWeight from '~/pages/RecordWeight';
 import Banner from '~/components/Banner';
 import { getWeights, updateWeight, deleteWeight } from '~/api/weight';
 import * as moment from 'moment';
 
-interface IEditWeightContainerProps {
-	params: { when: string; };
+interface IParams {
+	when: string;
 }
+
+type IEditWeightContainerProps = RouteComponentProps<IParams>;
 
 interface IEditWeightContainerState {
 	when: string | null;
@@ -15,7 +18,7 @@ interface IEditWeightContainerState {
 	submitting: boolean;
 }
 
-export default class EditWeightContainer extends React.PureComponent<IEditWeightContainerProps, IEditWeightContainerState> {
+class EditWeightContainer extends React.PureComponent<IEditWeightContainerProps, IEditWeightContainerState> {
 	constructor(props: IEditWeightContainerProps) {
 		super(props);
 		this.state = {
@@ -26,7 +29,8 @@ export default class EditWeightContainer extends React.PureComponent<IEditWeight
 	}
 
 	componentDidMount() {
-		const { params } = this.props;
+		const { match } = this.props;
+		const { params } = match;
 		const when = moment(params.when);
 		getWeights(moment(params.when), when.add(1, 'day')).then(weights => {
 			const { when, weightInPounds } = weights[0];
@@ -42,18 +46,20 @@ export default class EditWeightContainer extends React.PureComponent<IEditWeight
 	}
 
 	handleClickSubmit = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IEditWeightContainerState);
 		const { when, weightInPounds } = this.state;
 		updateWeight(when, +weightInPounds).then(() => {
-			browserHistory.push('/weight');
+			history.push('/weight');
 		});
 	}
 
 	handleClickDelete = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IEditWeightContainerState);
 		const { when } = this.state;
 		deleteWeight(when).then(() => {
-			browserHistory.push('/weight');
+			history.push('/weight');
 		});
 	}
 
@@ -70,3 +76,5 @@ export default class EditWeightContainer extends React.PureComponent<IEditWeight
 		);
 	}
 }
+
+export default withRouter(EditWeightContainer);

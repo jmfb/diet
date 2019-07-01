@@ -10,11 +10,11 @@ interface IImportContainerState {
 	pendingFileCount: number;
 }
 
-export default class ImportContainer extends React.PureComponent<void, IImportContainerState> {
+export default class ImportContainer extends React.PureComponent<{}, IImportContainerState> {
 	fileReader: FileReader;
 	pendingFiles: File[];
 
-	constructor(props: void) {
+	constructor(props: {}) {
 		super(props);
 		this.state = {
 			weightRecords: [],
@@ -27,7 +27,7 @@ export default class ImportContainer extends React.PureComponent<void, IImportCo
 
 	componentDidMount() {
 		this.fileReader.onload = () => {
-			const { result } = this.fileReader;
+			const { result } = this.fileReader as { result: string };
 			this.loadWeightRecords(this.parseWeightRecords(result));
 			this.pendingFiles.splice(0, 1);
 			this.setState({

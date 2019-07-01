@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import Profile from '~/pages/Profile';
 import Banner from '~/components/Banner';
 import { IGender, IBodyType } from '~/models';
@@ -15,8 +16,8 @@ interface IProfileContainerState {
 	submitting: boolean;
 }
 
-export default class ProfileContainer extends React.PureComponent<void, IProfileContainerState> {
-	constructor(props: void) {
+class ProfileContainer extends React.PureComponent<RouteComponentProps, IProfileContainerState> {
+	constructor(props: RouteComponentProps) {
 		super(props);
 		this.state = {
 			genderId: null,
@@ -64,9 +65,10 @@ export default class ProfileContainer extends React.PureComponent<void, IProfile
 	}
 
 	handleClickSubmit = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IProfileContainerState);
 		updateProfile(this.state).then(() => {
-			browserHistory.push('/');
+			history.push('/');
 		});
 	}
 
@@ -87,3 +89,5 @@ export default class ProfileContainer extends React.PureComponent<void, IProfile
 		);
 	}
 }
+
+export default withRouter(ProfileContainer);

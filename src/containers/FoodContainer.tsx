@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import EditFood from '~/pages/EditFood';
 import EditRecipe from '~/pages/EditRecipe';
 import Banner from '~/components/Banner';
 import { IFood, INutrition, IIngredient, IPlan } from '~/models';
 import { getFoods, getFood, updateRecipe, updateFood, deleteFood } from '~/api/meals';
 
-interface IFoodContainerProps {
-	params: { id: string; };
+interface IParams {
+	id: string;
 }
+
+type IFoodContainerProps = RouteComponentProps<IParams>;
 
 interface IFoodContainerState {
 	foods: IFood[] | null;
@@ -24,7 +27,7 @@ interface IFoodContainerState {
 	submitting: boolean;
 }
 
-export default class FoodContainer extends React.PureComponent<IFoodContainerProps, IFoodContainerState> {
+class FoodContainer extends React.PureComponent<IFoodContainerProps, IFoodContainerState> {
 	constructor(props: IFoodContainerProps) {
 		super(props);
 		this.state = {
@@ -43,7 +46,8 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 	}
 
 	componentDidMount() {
-		const { params } = this.props;
+		const { match } = this.props;
+		const { params } = match;
 		getFoods().then(foods => {
 			this.setState({ foods } as IFoodContainerState);
 		});
@@ -52,7 +56,7 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 
 	componentWillReceiveProps(nextProps: IFoodContainerProps) {
 		const { id } = this.state;
-		const nextId = +nextProps.params.id;
+		const nextId = +nextProps.match.params.id;
 		if (id !== nextId) {
 			this.setState({
 				id: null,
@@ -126,38 +130,43 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 	}
 
 	handleClickSubmitFood = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IFoodContainerState);
 		const { id, name, unitSize, unitMeasure, siteUrl, nutrition } = this.state;
 		updateFood(id, name, unitSize, unitMeasure, siteUrl, nutrition).then(() => {
-			browserHistory.push('/meals/foods');
+			history.push('/meals/foods');
 		});
 	}
 
 	handleClickCancel = () => {
-		browserHistory.push('/meals/foods');
+		const { history } = this.props;
+		history.push('/meals/foods');
 	}
 
 	handleClickSubmitRecipe = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IFoodContainerState);
 		const { id, name, unitSize, unitMeasure, siteUrl, ingredients } = this.state;
 		updateRecipe(id, name, unitSize, unitMeasure, siteUrl, ingredients).then(() => {
-			browserHistory.push('/meals/foods');
+			history.push('/meals/foods');
 		});
 	}
 
 	handleClickCopyRecipe = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IFoodContainerState);
 		const { name, unitSize, unitMeasure, siteUrl, ingredients } = this.state;
 		updateRecipe(0, `Copy of ${name}`, unitSize, unitMeasure, siteUrl, ingredients).then(id => {
-			browserHistory.push(`/meals/foods/${id}`);
+			history.push(`/meals/foods/${id}`);
 		});
 	}
 
 	handleClickDelete = () => {
+		const { history } = this.props;
 		this.setState({ submitting: true } as IFoodContainerState);
 		const { id } = this.state;
 		deleteFood(id).then(() => {
-			browserHistory.push('/meals/foods');
+			history.push('/meals/foods');
 		});
 	}
 
@@ -222,3 +231,5 @@ export default class FoodContainer extends React.PureComponent<IFoodContainerPro
 		);
 	}
 }
+
+export default withRouter(FoodContainer);
