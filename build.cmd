@@ -7,8 +7,8 @@ call npm install
 call npm run build
 robocopy .\web .\deploy\wwwroot /MIR
 
-nuget restore DietApi.sln
-"c:\program files (x86)\msbuild\14.0\bin\msbuild" ^
+.\.nuget\nuget.exe restore DietApi.sln
+"c:\program files (x86)\Microsoft Visual Studio\2017\Enterprise\msbuild\15.0\bin\msbuild.exe" ^
 	DietApi.sln ^
 	/p:Configuration=Release ^
 	/p:Platform="Any CPU" ^

@@ -9,6 +9,7 @@
 - Visual Studio 2017
 - Node v12.5.0
 - NPM v6.9.0
+- WinSCP
 
 ## Local Development Steps - Full Stack
 
