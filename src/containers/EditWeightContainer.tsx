@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import RecordWeight from '~/pages/RecordWeight';
 import Banner from '~/components/Banner';
-import { getWeights, updateWeight, deleteWeight } from '~/api/weight';
+import WeightApi from '~/api/WeightApi';
 import * as moment from 'moment';
 
 interface IParams {
@@ -32,7 +32,7 @@ class EditWeightContainer extends React.PureComponent<IEditWeightContainerProps,
 		const { match } = this.props;
 		const { params } = match;
 		const when = moment(params.when);
-		getWeights(moment(params.when), when.add(1, 'day')).then(weights => {
+		WeightApi.getWeights(moment(params.when), when.add(1, 'day')).then(weights => {
 			const { when, weightInPounds } = weights[0];
 			this.setState({
 				when,
@@ -49,7 +49,7 @@ class EditWeightContainer extends React.PureComponent<IEditWeightContainerProps,
 		const { history } = this.props;
 		this.setState({ submitting: true } as IEditWeightContainerState);
 		const { when, weightInPounds } = this.state;
-		updateWeight(when, +weightInPounds).then(() => {
+		WeightApi.updateWeight(when, +weightInPounds).then(() => {
 			history.push('/weight');
 		});
 	}
@@ -58,7 +58,7 @@ class EditWeightContainer extends React.PureComponent<IEditWeightContainerProps,
 		const { history } = this.props;
 		this.setState({ submitting: true } as IEditWeightContainerState);
 		const { when } = this.state;
-		deleteWeight(when).then(() => {
+		WeightApi.deleteWeight(when).then(() => {
 			history.push('/weight');
 		});
 	}

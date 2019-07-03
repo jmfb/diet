@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import Meals from '~/pages/Meals';
 import { IPlanSummary } from '~/models';
-import { getPlans } from '~/api/meals';
+import MealsApi from '~/api/MealsApi';
 
 interface IMealsContainerState {
 	plans: IPlanSummary[] | null;
@@ -16,7 +16,7 @@ class MealsContainer extends React.PureComponent<RouteComponentProps, IMealsCont
 	}
 
 	componentDidMount() {
-		getPlans().then(plans => {
+		MealsApi.getPlans().then(plans => {
 			this.setState({ plans });
 		});
 	}

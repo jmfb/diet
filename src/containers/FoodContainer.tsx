@@ -5,7 +5,7 @@ import EditFood from '~/pages/EditFood';
 import EditRecipe from '~/pages/EditRecipe';
 import Banner from '~/components/Banner';
 import { IFood, INutrition, IIngredient, IPlan } from '~/models';
-import { getFoods, getFood, updateRecipe, updateFood, deleteFood } from '~/api/meals';
+import MealsApi from '~/api/MealsApi';
 
 interface IParams {
 	id: string;
@@ -48,7 +48,7 @@ class FoodContainer extends React.PureComponent<IFoodContainerProps, IFoodContai
 	componentDidMount() {
 		const { match } = this.props;
 		const { params } = match;
-		getFoods().then(foods => {
+		MealsApi.getFoods().then(foods => {
 			this.setState({ foods } as IFoodContainerState);
 		});
 		this.loadFood(+params.id);
@@ -75,7 +75,7 @@ class FoodContainer extends React.PureComponent<IFoodContainerProps, IFoodContai
 	}
 
 	loadFood = (foodId: number) => {
-		getFood(foodId).then(food => {
+		MealsApi.getFood(foodId).then(food => {
 			const { id, name, unitSize, unitMeasure, siteUrl, nutrition, ingredients, recipes, plans } = food;
 			this.setState({
 				id,
@@ -133,7 +133,7 @@ class FoodContainer extends React.PureComponent<IFoodContainerProps, IFoodContai
 		const { history } = this.props;
 		this.setState({ submitting: true } as IFoodContainerState);
 		const { id, name, unitSize, unitMeasure, siteUrl, nutrition } = this.state;
-		updateFood(id, name, unitSize, unitMeasure, siteUrl, nutrition).then(() => {
+		MealsApi.updateFood(id, name, unitSize, unitMeasure, siteUrl, nutrition).then(() => {
 			history.push('/meals/foods');
 		});
 	}
@@ -147,7 +147,7 @@ class FoodContainer extends React.PureComponent<IFoodContainerProps, IFoodContai
 		const { history } = this.props;
 		this.setState({ submitting: true } as IFoodContainerState);
 		const { id, name, unitSize, unitMeasure, siteUrl, ingredients } = this.state;
-		updateRecipe(id, name, unitSize, unitMeasure, siteUrl, ingredients).then(() => {
+		MealsApi.updateRecipe(id, name, unitSize, unitMeasure, siteUrl, ingredients).then(() => {
 			history.push('/meals/foods');
 		});
 	}
@@ -156,7 +156,7 @@ class FoodContainer extends React.PureComponent<IFoodContainerProps, IFoodContai
 		const { history } = this.props;
 		this.setState({ submitting: true } as IFoodContainerState);
 		const { name, unitSize, unitMeasure, siteUrl, ingredients } = this.state;
-		updateRecipe(0, `Copy of ${name}`, unitSize, unitMeasure, siteUrl, ingredients).then(id => {
+		MealsApi.updateRecipe(0, `Copy of ${name}`, unitSize, unitMeasure, siteUrl, ingredients).then(id => {
 			history.push(`/meals/foods/${id}`);
 		});
 	}
@@ -165,7 +165,7 @@ class FoodContainer extends React.PureComponent<IFoodContainerProps, IFoodContai
 		const { history } = this.props;
 		this.setState({ submitting: true } as IFoodContainerState);
 		const { id } = this.state;
-		deleteFood(id).then(() => {
+		MealsApi.deleteFood(id).then(() => {
 			history.push('/meals/foods');
 		});
 	}

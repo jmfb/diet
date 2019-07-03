@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ImportWeightRecords from '~/pages/ImportWeightRecords';
 import { IWeightRecord } from '~/models';
-import { updateWeight } from '~/api/weight';
+import WeightApi from '~/api/WeightApi';
 import * as moment from 'moment';
 
 interface IImportContainerState {
@@ -65,7 +65,7 @@ export default class ImportContainer extends React.PureComponent<{}, IImportCont
 	uploadNextWeightRecord = () => {
 		const { weightRecords } = this.state;
 		const { when, weightInPounds } = weightRecords[0];
-		updateWeight(when, weightInPounds).then(() => {
+		WeightApi.updateWeight(when, weightInPounds).then(() => {
 			weightRecords.splice(0, 1);
 			this.setState({
 				weightRecords: [...weightRecords],

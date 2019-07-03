@@ -2,7 +2,7 @@ import * as React from 'react';
 import { withRouter } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import RecordWeight from '~/pages/RecordWeight';
-import { updateWeight } from '~/api/weight';
+import WeightApi from '~/api/WeightApi';
 import * as moment from 'moment';
 
 interface IRecordWeightContainerState {
@@ -27,7 +27,7 @@ class RecordWeightContainer extends React.PureComponent<RouteComponentProps, IRe
 		const { history } = this.props;
 		this.setState({ submitting: true } as IRecordWeightContainerState);
 		const { weightInPounds } = this.state;
-		updateWeight(moment().format('YYYY-MM-DD'), +weightInPounds).then(() => {
+		WeightApi.updateWeight(moment().format('YYYY-MM-DD'), +weightInPounds).then(() => {
 			history.push('/');
 		});
 	}

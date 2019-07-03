@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import EditMeal from '~/pages/EditMeal';
 import { IFood, IMeal } from '~/models';
-import { updatePlan, getFoods } from '~/api/meals';
+import MealsApi from '~/api/MealsApi';
 
 interface ICreateMealContainerState {
 	foods: IFood[];
@@ -32,7 +32,7 @@ class CreateMealContainer extends React.PureComponent<RouteComponentProps, ICrea
 	}
 
 	componentDidMount() {
-		getFoods().then(foods => {
+		MealsApi.getFoods().then(foods => {
 			this.setState({ foods } as ICreateMealContainerState);
 		});
 	}
@@ -80,7 +80,7 @@ class CreateMealContainer extends React.PureComponent<RouteComponentProps, ICrea
 			carbohydrates: targetCalories * targetCarbohydratesPercent / 100 / 4,
 			fat: targetCalories * targetFatPercent / 100 / 9
 		};
-		updatePlan(0, name, target, meals).then(() => {
+		MealsApi.updatePlan(0, name, target, meals).then(() => {
 			history.push('/meals');
 		});
 	}

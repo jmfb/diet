@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import Banner from '~/components/Banner';
 import EditMeal from '~/pages/EditMeal';
 import { IFood, IMeal } from '~/models';
-import { getFoods, getPlan, updatePlan, deletePlan } from '~/api/meals';
+import MealsApi from '~/api/MealsApi';
 
 interface IParams {
 	id: string;
@@ -43,7 +43,7 @@ class MealContainer extends React.PureComponent<IMealContainerProps, IMealContai
 	componentDidMount() {
 		const { match } = this.props;
 		const { params } = match;
-		getFoods().then(foods => {
+		MealsApi.getFoods().then(foods => {
 			this.setState({ foods } as IMealContainerState);
 		});
 		this.loadPlan(+params.id);
@@ -68,7 +68,7 @@ class MealContainer extends React.PureComponent<IMealContainerProps, IMealContai
 	}
 
 	loadPlan = (planId: number) => {
-		getPlan(planId).then(plan => {
+		MealsApi.getPlan(planId).then(plan => {
 			const { id, name, target, meals } = plan;
 			const { protein, fat, carbohydrates } = target;
 			const targetCalories = Math.round(protein * 4 + fat * 9 + carbohydrates * 4);
@@ -130,7 +130,7 @@ class MealContainer extends React.PureComponent<IMealContainerProps, IMealContai
 			carbohydrates: targetCalories * targetCarbohydratesPercent / 100 / 4,
 			fat: targetCalories * targetFatPercent / 100 / 9
 		};
-		updatePlan(id, name, target, meals).then(() => {
+		MealsApi.updatePlan(id, name, target, meals).then(() => {
 			history.push('/meals');
 		});
 	}
@@ -149,7 +149,7 @@ class MealContainer extends React.PureComponent<IMealContainerProps, IMealContai
 			carbohydrates: targetCalories * targetCarbohydratesPercent / 100 / 4,
 			fat: targetCalories * targetFatPercent / 100 / 9
 		};
-		updatePlan(0, `Copy of ${name}`, target, meals).then(id => {
+		MealsApi.updatePlan(0, `Copy of ${name}`, target, meals).then(id => {
 			history.push(`/meals/${id}`);
 		});
 	}
@@ -158,7 +158,7 @@ class MealContainer extends React.PureComponent<IMealContainerProps, IMealContai
 		const { history } = this.props;
 		this.setState({ submitting: true } as IMealContainerState);
 		const { id } = this.state;
-		deletePlan(id).then(() => {
+		MealsApi.deletePlan(id).then(() => {
 			history.push('/meals');
 		});
 	}

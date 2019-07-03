@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import Weight from '~/pages/Weight';
 import { IWeightRecord } from '~/models';
-import { getRecentWeights } from '~/api/weight';
+import WeightApi from '~/api/WeightApi';
 
 interface IWeightContainerState {
 	weights: IWeightRecord[];
@@ -22,7 +22,7 @@ class WeightContainer extends React.PureComponent<RouteComponentProps, IWeightCo
 	}
 
 	componentDidMount() {
-		getRecentWeights(0, 10).then(weights => {
+		WeightApi.getRecentWeights(0, 10).then(weights => {
 			this.setState({
 				weights,
 				moreWeights: weights.length === 10,
@@ -44,7 +44,7 @@ class WeightContainer extends React.PureComponent<RouteComponentProps, IWeightCo
 	handleClickLoadMore = () => {
 		this.setState({ loading: true } as IWeightContainerState);
 		const { weights } = this.state;
-		getRecentWeights(weights.length, 10).then(newWeights => {
+		WeightApi.getRecentWeights(weights.length, 10).then(newWeights => {
 			this.setState({
 				weights: [...weights, ...newWeights],
 				moreWeights: newWeights.length === 10,

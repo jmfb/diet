@@ -3,8 +3,8 @@ import { withRouter } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import Home from '~/pages/Home';
 import { IProfile, IWeightRecord } from '~/models';
-import { getProfile } from '~/api/profiles';
-import { getWeights } from '~/api/weight';
+import ProfilesApi from '~/api/ProfilesApi';
+import WeightApi from '~/api/WeightApi';
 import * as moment from 'moment';
 
 interface IHomeContainerState {
@@ -26,16 +26,16 @@ class HomeContainer extends React.PureComponent<RouteComponentProps, IHomeContai
 	}
 
 	componentDidMount() {
-		getProfile().then(profile => {
+		ProfilesApi.getProfile().then(profile => {
 			this.setState({ profile } as IHomeContainerState);
 		});
-		getWeights(moment('1900-01-01'), moment().add(1, 'day')).then(weightRecords => {
+		WeightApi.getWeights(moment('1900-01-01'), moment().add(1, 'day')).then(weightRecords => {
 			this.setState({ lifetime: weightRecords } as IHomeContainerState);
 		});
-		getWeights(moment().add(-30, 'days'), moment().add(1, 'day')).then(weightRecords => {
+		WeightApi.getWeights(moment().add(-30, 'days'), moment().add(1, 'day')).then(weightRecords => {
 			this.setState({ last30days: weightRecords } as IHomeContainerState);
 		});
-		getWeights(moment().add(-7, 'days'), moment().add(1, 'day')).then(weightRecords => {
+		WeightApi.getWeights(moment().add(-7, 'days'), moment().add(1, 'day')).then(weightRecords => {
 			this.setState({ last7days: weightRecords } as IHomeContainerState);
 		});
 	}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Login from '~/pages/Login';
-import { getAuthenticationUrl } from '~/api/auth';
+import AuthApi from '~/api/AuthApi';
 
 interface ILoginContainerState {
 	signingIn: boolean;
@@ -14,7 +14,7 @@ export default class LoginContainer extends React.PureComponent<{}, ILoginContai
 
 	handleClickSignIn = () => {
 		this.setState({ signingIn: true });
-		getAuthenticationUrl().then(url => {
+		AuthApi.getAuthenticationUrl().then(url => {
 			window.location.href = url;
 		});
 	}

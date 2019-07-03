@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import EditRecipe from '~/pages/EditRecipe';
 import { IIngredient, IFood } from '~/models';
-import { getFoods, updateRecipe } from '~/api/meals';
+import MealsApi from '~/api/MealsApi';
 
 interface ICreateRecipeContainerState {
 	foods: IFood[];
@@ -30,7 +30,7 @@ class CreateRecipeContainer extends React.PureComponent<RouteComponentProps, ICr
 	}
 
 	componentDidMount() {
-		getFoods().then(foods => {
+		MealsApi.getFoods().then(foods => {
 			this.setState({ foods } as ICreateRecipeContainerState);
 		});
 	}
@@ -73,7 +73,7 @@ class CreateRecipeContainer extends React.PureComponent<RouteComponentProps, ICr
 		const { history } = this.props;
 		this.setState({ submitting: true } as ICreateRecipeContainerState);
 		const { name, unitSize, unitMeasure, siteUrl, ingredients } = this.state;
-		updateRecipe(0, name, unitSize, unitMeasure, siteUrl, ingredients).then(() => {
+		MealsApi.updateRecipe(0, name, unitSize, unitMeasure, siteUrl, ingredients).then(() => {
 			history.push('/meals/foods');
 		});
 	}

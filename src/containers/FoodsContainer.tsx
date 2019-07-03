@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import Foods from '~/pages/Foods';
 import { IFood } from '~/models';
-import { getFoods } from '~/api/meals';
+import MealsApi from '~/api/MealsApi';
 
 interface IFoodsContainerState {
 	foods: IFood[] | null;
@@ -20,7 +20,7 @@ class FoodsContainer extends React.PureComponent<RouteComponentProps, IFoodsCont
 	}
 
 	componentDidMount() {
-		getFoods().then(foods => {
+		MealsApi.getFoods().then(foods => {
 			this.setState({ foods } as IFoodsContainerState);
 		});
 	}

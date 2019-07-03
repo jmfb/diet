@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import Profile from '~/pages/Profile';
 import Banner from '~/components/Banner';
 import { IGender, IBodyType } from '~/models';
-import { getProfile, updateProfile } from '~/api/profiles';
+import ProfilesApi from '~/api/ProfilesApi';
 
 interface IProfileContainerState {
 	genderId: IGender | null;
@@ -31,7 +31,7 @@ class ProfileContainer extends React.PureComponent<RouteComponentProps, IProfile
 	}
 
 	componentDidMount() {
-		getProfile().then(profile => {
+		ProfilesApi.getProfile().then(profile => {
 			const { genderId, bodyTypeId, heightInInches, birthYear, targetWeightInPounds } = profile;
 			this.setState({
 				genderId,
@@ -67,7 +67,7 @@ class ProfileContainer extends React.PureComponent<RouteComponentProps, IProfile
 	handleClickSubmit = () => {
 		const { history } = this.props;
 		this.setState({ submitting: true } as IProfileContainerState);
-		updateProfile(this.state).then(() => {
+		ProfilesApi.updateProfile(this.state).then(() => {
 			history.push('/');
 		});
 	}
