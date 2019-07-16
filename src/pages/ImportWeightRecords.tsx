@@ -9,8 +9,8 @@ interface IImportWeightRecordsProps {
 	submitting: boolean;
 	pendingFileCount: number;
 	weightRecords: IWeightRecord[];
-	onChooseFile: (file: File) => void;
-	onClickSubmit: () => void;
+	onChooseFile(file: File): void;
+	onClickSubmit(): void;
 }
 
 export default class ImportWeightRecords extends React.PureComponent<IImportWeightRecordsProps> {

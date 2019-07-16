@@ -8,7 +8,7 @@ import * as styles from './Meals.scss';
 
 interface IMealsProps {
 	plans: IPlanSummary[] | null;
-	onClickCreatePlan: () => void;
+	onClickCreatePlan(): void;
 }
 
 export default class Meals extends React.PureComponent<IMealsProps> {

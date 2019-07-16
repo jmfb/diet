@@ -10,9 +10,9 @@ interface IWeightProps {
 	weights: IWeightRecord[];
 	moreWeights: boolean;
 	loading: boolean;
-	onClickAdd: () => void;
-	onClickImport: () => void;
-	onClickLoadMore: () => void;
+	onClickAdd(): void;
+	onClickImport(): void;
+	onClickLoadMore(): void;
 }
 
 export default class Weight extends React.PureComponent<IWeightProps> {

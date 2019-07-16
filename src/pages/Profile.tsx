@@ -12,12 +12,12 @@ interface IProfileProps {
 	heightInInches: number | null;
 	birthYear: number | null;
 	targetWeightInPounds: number | null;
-	onUpdateGender: (genderId: IGender) => void;
-	onUpdateBodyType: (bodyTypeId: IBodyType) => void;
-	onUpdateHeightInInches: (heightInInches: number) => void;
-	onUpdateBirthYear: (birthYear: number) => void;
-	onUpdateTargetWeightInPounds: (targetWeightInPounds: number) => void;
-	onClickSubmit: () => void;
+	onUpdateGender(genderId: IGender): void;
+	onUpdateBodyType(bodyTypeId: IBodyType): void;
+	onUpdateHeightInInches(heightInInches: number): void;
+	onUpdateBirthYear(birthYear: number): void;
+	onUpdateTargetWeightInPounds(targetWeightInPounds: number): void;
+	onClickSubmit(): void;
 }
 
 export default class Profile extends React.PureComponent<IProfileProps> {

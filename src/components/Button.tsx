@@ -9,7 +9,7 @@ interface IButtonProps {
 	display: string;
 	element?: 'button' | 'div';
 	type: ButtonType;
-	onClick?: () => void;
+	onClick?(): void;
 }
 
 export default class Button extends React.PureComponent<IButtonProps> {

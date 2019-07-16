@@ -6,7 +6,7 @@ interface ISignInButtonProps {
 	disabled: boolean;
 	style: 'dark' | 'light';
 	className?: string;
-	onClick: () => void;
+	onClick(): void;
 }
 
 export default class SignInButton extends React.PureComponent<ISignInButtonProps> {

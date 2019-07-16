@@ -13,13 +13,14 @@ interface IHomeProps {
 	lifetime: IWeightRecord[] | null;
 	last30days: IWeightRecord[] | null;
 	last7days: IWeightRecord[] | null;
-	onClickProfile: () => void;
-	onClickLogout: () => void;
+	onClickProfile(): void;
+	onClickLogout(): void;
+	onClickRecordWeight(): void;
 }
 
 export default class Home extends React.PureComponent<IHomeProps> {
 	render() {
-		const { name, profile, lifetime, last30days, last7days, onClickProfile, onClickLogout } = this.props;
+		const { name, profile, lifetime, last30days, last7days, onClickProfile, onClickLogout, onClickRecordWeight } = this.props;
 		const targetWeightInPounds = profile === null ? null : profile.targetWeightInPounds;
 		return (
 			<div>
@@ -49,8 +50,9 @@ export default class Home extends React.PureComponent<IHomeProps> {
 						title='Lifetime'
 						weightRecords={lifetime} />
 				}
-				<Button className={styles.option} type='primary' display='Profile' onClick={onClickProfile} />
-				<Button className={styles.option} type='primary' display='Logout' onClick={onClickLogout} />
+				<Button className={styles.option} type='primary' display='Record Weight' onClick={onClickRecordWeight} />
+				<Button className={styles.option} type='secondary' display='Profile' onClick={onClickProfile} />
+				<Button className={styles.option} type='secondary' display='Logout' onClick={onClickLogout} />
 			</div>
 		);
 	}

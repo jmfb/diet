@@ -13,14 +13,14 @@ interface IEditFoodProps {
 	nutrition: INutrition;
 	recipes: string[];
 	submitting: boolean;
-	onUpdateName: (name: string) => void;
-	onUpdateUnitSize: (unitSize: number) => void;
-	onUpdateUnitMeasure: (unitMeasure: string) => void;
-	onUpdateSiteUrl: (siteUrl: string) => void;
-	onUpdateNutrition: (nutrition: INutrition) => void;
-	onClickSubmit: () => void;
-	onClickCancel: () => void;
-	onClickDelete?: () => void;
+	onUpdateName(name: string): void;
+	onUpdateUnitSize(unitSize: number): void;
+	onUpdateUnitMeasure(unitMeasure: string): void;
+	onUpdateSiteUrl(siteUrl: string): void;
+	onUpdateNutrition(nutrition: INutrition): void;
+	onClickSubmit(): void;
+	onClickCancel(): void;
+	onClickDelete?(): void;
 }
 
 export default class EditFood extends React.PureComponent<IEditFoodProps> {

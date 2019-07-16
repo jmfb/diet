@@ -5,7 +5,7 @@ import * as styles from './Login.scss';
 
 interface ILoginProps {
 	signingIn: boolean;
-	onClickSignIn: () => void;
+	onClickSignIn(): void;
 }
 
 export default class Login extends React.PureComponent<ILoginProps> {

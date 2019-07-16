@@ -9,9 +9,9 @@ import * as styles from './Foods.scss';
 interface IFoodsProps {
 	foods: IFood[] | null;
 	filter: string;
-	onClickCreateFood: () => void;
-	onClickCreateRecipe: () => void;
-	onUpdateFilter: (filter: string) => void;
+	onClickCreateFood(): void;
+	onClickCreateRecipe(): void;
+	onUpdateFilter(filter: string): void;
 }
 
 export default class Foods extends React.PureComponent<IFoodsProps> {

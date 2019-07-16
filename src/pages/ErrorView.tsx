@@ -6,7 +6,7 @@ interface IErrorViewProps {
 	status: number;
 	statusText: string;
 	error: string;
-	onClickLogout: () => void;
+	onClickLogout(): void;
 }
 
 export default class ErrorView extends React.PureComponent<IErrorViewProps> {

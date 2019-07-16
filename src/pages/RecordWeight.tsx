@@ -7,9 +7,9 @@ import * as styles from './RecordWeight.scss';
 interface IRecordWeightProps {
 	submitting: boolean;
 	weightInPounds: string;
-	onUpdateWeight: (weightInPounds: string) => void;
-	onClickSubmit: () => void;
-	onClickDelete?: () => void;
+	onUpdateWeight(weightInPounds: string): void;
+	onClickSubmit(): void;
+	onClickDelete?(): void;
 }
 
 export default class RecordWeight extends React.PureComponent<IRecordWeightProps> {

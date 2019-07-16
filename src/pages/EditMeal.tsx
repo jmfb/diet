@@ -16,15 +16,15 @@ interface IEditMealProps {
 	targetFatPercent: number;
 	meals: IMeal[];
 	submitting: boolean;
-	onUpdateName: (name: string) => void;
-	onUpdateTargetCalories: (targetCalories: number) => void;
-	onUpdateTargetPercent: (proteinPercent: number, carbohydratesPercent: number, fatPercent: number) => void;
-	onAddMeal: (id: number) => void;
-	onUpdateQuantity: (index: number, quantity: number) => void;
-	onClickSubmit: () => void;
-	onClickCancel: () => void;
-	onClickCopy?: () => void;
-	onClickDelete?: () => void;
+	onUpdateName(name: string): void;
+	onUpdateTargetCalories(targetCalories: number): void;
+	onUpdateTargetPercent(proteinPercent: number, carbohydratesPercent: number, fatPercent: number): void;
+	onAddMeal(id: number): void;
+	onUpdateQuantity(index: number, quantity: number): void;
+	onClickSubmit(): void;
+	onClickCancel(): void;
+	onClickCopy?(): void;
+	onClickDelete?(): void;
 }
 
 export default class EditMeal extends React.PureComponent<IEditMealProps> {

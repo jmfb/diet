@@ -52,6 +52,11 @@ class HomeContainer extends React.PureComponent<RouteComponentProps, IHomeContai
 		history.push('/login');
 	}
 
+	handleClickRecordWeight = () => {
+		const { history } = this.props;
+		history.push('/weight/add');
+	}
+
 	render() {
 		const { profile, lifetime, last30days, last7days } = this.state;
 		const name = localStorage.getItem('name');
@@ -59,7 +64,9 @@ class HomeContainer extends React.PureComponent<RouteComponentProps, IHomeContai
 			<Home
 				{...{name, profile, lifetime, last30days, last7days}}
 				onClickProfile={this.handleClickProfile}
-				onClickLogout={this.handleClickLogout} />
+				onClickLogout={this.handleClickLogout}
+				onClickRecordWeight={this.handleClickRecordWeight}
+				/>
 		);
 	}
 }

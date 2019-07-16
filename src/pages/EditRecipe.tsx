@@ -17,16 +17,16 @@ interface IEditRecipeProps {
 	ingredients: IIngredient[];
 	recipes: string[];
 	submitting: boolean;
-	onUpdateName: (name: string) => void;
-	onUpdateUnitSize: (unitSize: number) => void;
-	onUpdateUnitMeasure: (unitMeasure: string) => void;
-	onUpdateSiteUrl: (siteUrl: string) => void;
-	onAddIngredient: (id: number) => void;
-	onUpdateQuantity: (index: number, quantity: number) => void;
-	onClickSubmit: () => void;
-	onClickCancel: () => void;
-	onClickCopy?: () => void;
-	onClickDelete?: () => void;
+	onUpdateName(name: string): void;
+	onUpdateUnitSize(unitSize: number): void;
+	onUpdateUnitMeasure(unitMeasure: string): void;
+	onUpdateSiteUrl(siteUrl: string): void;
+	onAddIngredient(id: number): void;
+	onUpdateQuantity(index: number, quantity: number): void;
+	onClickSubmit(): void;
+	onClickCancel(): void;
+	onClickCopy?(): void;
+	onClickDelete?(): void;
 }
 
 export default class EditRecipe extends React.PureComponent<IEditRecipeProps> {
