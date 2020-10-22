@@ -1,0 +1,320 @@
+[
+  {
+    "Id": "1",
+    "Protein": "2",
+    "Fat": "0",
+    "Carbohydrates": "24"
+  },
+  {
+    "Id": "2",
+    "Protein": "9",
+    "Fat": "0",
+    "Carbohydrates": "13"
+  },
+  {
+    "Id": "3",
+    "Protein": "2",
+    "Fat": "0",
+    "Carbohydrates": "26"
+  },
+  {
+    "Id": "4",
+    "Protein": "1",
+    "Fat": "0",
+    "Carbohydrates": "27"
+  },
+  {
+    "Id": "5",
+    "Protein": "11",
+    "Fat": "2",
+    "Carbohydrates": "2"
+  },
+  {
+    "Id": "6",
+    "Protein": "6",
+    "Fat": "5",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "7",
+    "Protein": "0",
+    "Fat": "0",
+    "Carbohydrates": "4"
+  },
+  {
+    "Id": "8",
+    "Protein": "3",
+    "Fat": "2.5",
+    "Carbohydrates": "18"
+  },
+  {
+    "Id": "9",
+    "Protein": "7",
+    "Fat": "8",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "10",
+    "Protein": "9",
+    "Fat": "17",
+    "Carbohydrates": "1"
+  },
+  {
+    "Id": "11",
+    "Protein": "6",
+    "Fat": "6",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "12",
+    "Protein": "21",
+    "Fat": "1",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "13",
+    "Protein": "7",
+    "Fat": "1",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "14",
+    "Protein": "23",
+    "Fat": "15",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "15",
+    "Protein": "36",
+    "Fat": "4",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "16",
+    "Protein": "0",
+    "Fat": "0",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "17",
+    "Protein": "1",
+    "Fat": "0",
+    "Carbohydrates": "4"
+  },
+  {
+    "Id": "18",
+    "Protein": "4",
+    "Fat": "0",
+    "Carbohydrates": "4"
+  },
+  {
+    "Id": "19",
+    "Protein": "1",
+    "Fat": "0",
+    "Carbohydrates": "9"
+  },
+  {
+    "Id": "20",
+    "Protein": "0",
+    "Fat": "0",
+    "Carbohydrates": "1"
+  },
+  {
+    "Id": "21",
+    "Protein": "0",
+    "Fat": "0",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "22",
+    "Protein": "0",
+    "Fat": "0",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "23",
+    "Protein": "17",
+    "Fat": "0",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "24",
+    "Protein": "25",
+    "Fat": "2.5",
+    "Carbohydrates": "4"
+  },
+  {
+    "Id": "29",
+    "Protein": "27",
+    "Fat": "6",
+    "Carbohydrates": "8"
+  },
+  {
+    "Id": "30",
+    "Protein": "11",
+    "Fat": "8",
+    "Carbohydrates": "5"
+  },
+  {
+    "Id": "31",
+    "Protein": "8",
+    "Fat": "8",
+    "Carbohydrates": "2"
+  },
+  {
+    "Id": "32",
+    "Protein": "20",
+    "Fat": "1",
+    "Carbohydrates": "54"
+  },
+  {
+    "Id": "33",
+    "Protein": "6",
+    "Fat": "12",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "34",
+    "Protein": "8",
+    "Fat": "16",
+    "Carbohydrates": "6"
+  },
+  {
+    "Id": "35",
+    "Protein": "0",
+    "Fat": "0",
+    "Carbohydrates": "8"
+  },
+  {
+    "Id": "36",
+    "Protein": "0",
+    "Fat": "0",
+    "Carbohydrates": "6"
+  },
+  {
+    "Id": "37",
+    "Protein": "25",
+    "Fat": "2.5",
+    "Carbohydrates": "4"
+  },
+  {
+    "Id": "38",
+    "Protein": "26",
+    "Fat": "2",
+    "Carbohydrates": "8"
+  },
+  {
+    "Id": "39",
+    "Protein": "2",
+    "Fat": "0",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "41",
+    "Protein": "15",
+    "Fat": "0",
+    "Carbohydrates": "6"
+  },
+  {
+    "Id": "46",
+    "Protein": "2",
+    "Fat": "0.7",
+    "Carbohydrates": "14"
+  },
+  {
+    "Id": "47",
+    "Protein": "1.5",
+    "Fat": "0.8",
+    "Carbohydrates": "15"
+  },
+  {
+    "Id": "48",
+    "Protein": "4.3",
+    "Fat": "0.4",
+    "Carbohydrates": "45"
+  },
+  {
+    "Id": "49",
+    "Protein": "2.7",
+    "Fat": "0.2",
+    "Carbohydrates": "7.4"
+  },
+  {
+    "Id": "50",
+    "Protein": "15.6",
+    "Fat": "7.9",
+    "Carbohydrates": "123"
+  },
+  {
+    "Id": "51",
+    "Protein": "1.1",
+    "Fat": "0.2",
+    "Carbohydrates": "4.8"
+  },
+  {
+    "Id": "52",
+    "Protein": "0.4",
+    "Fat": "0.2",
+    "Carbohydrates": "14"
+  },
+  {
+    "Id": "54",
+    "Protein": "1",
+    "Fat": "2.5",
+    "Carbohydrates": "1"
+  },
+  {
+    "Id": "55",
+    "Protein": "23",
+    "Fat": "7",
+    "Carbohydrates": "0"
+  },
+  {
+    "Id": "56",
+    "Protein": "0.6",
+    "Fat": "0.1",
+    "Carbohydrates": "9"
+  },
+  {
+    "Id": "57",
+    "Protein": "0.6",
+    "Fat": "0.1",
+    "Carbohydrates": "6"
+  },
+  {
+    "Id": "58",
+    "Protein": "0.3",
+    "Fat": "0.1",
+    "Carbohydrates": "1.9"
+  },
+  {
+    "Id": "59",
+    "Protein": "0",
+    "Fat": "1",
+    "Carbohydrates": "4"
+  },
+  {
+    "Id": "60",
+    "Protein": "1",
+    "Fat": "13",
+    "Carbohydrates": "8"
+  },
+  {
+    "Id": "61",
+    "Protein": "0",
+    "Fat": "8",
+    "Carbohydrates": "0.4"
+  },
+  {
+    "Id": "62",
+    "Protein": "2.1",
+    "Fat": "0.1",
+    "Carbohydrates": "27"
+  },
+  {
+    "Id": "63",
+    "Protein": "2.6",
+    "Fat": "0.3",
+    "Carbohydrates": "25"
+  }
+]

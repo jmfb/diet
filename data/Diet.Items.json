@@ -1,0 +1,538 @@
+[
+  {
+    "Id": "1",
+    "UserId": "1",
+    "Name": "Corn Flakes",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": "http://nutritiondata.self.com/facts/breakfast-cereals/1527/2"
+  },
+  {
+    "Id": "2",
+    "UserId": "1",
+    "Name": "Skim Milk",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "3",
+    "UserId": "1",
+    "Name": "Orange Juice",
+    "UnitSize": "8",
+    "UnitMeasure": "ounce",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "4",
+    "UserId": "1",
+    "Name": "Banana",
+    "UnitSize": "1",
+    "UnitMeasure": "",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "5",
+    "UserId": "1",
+    "Name": "Ham",
+    "UnitSize": "1",
+    "UnitMeasure": "slice",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "6",
+    "UserId": "1",
+    "Name": "Egg",
+    "UnitSize": "1",
+    "UnitMeasure": "",
+    "SiteUrl": "http://nutritiondata.self.com/facts/dairy-and-egg-products/120/2"
+  },
+  {
+    "Id": "7",
+    "UserId": "1",
+    "Name": "Salsa",
+    "UnitSize": "4",
+    "UnitMeasure": "tbsp",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "8",
+    "UserId": "1",
+    "Name": "Tortilla",
+    "UnitSize": "1",
+    "UnitMeasure": "",
+    "SiteUrl": "http://nutritiondata.self.com/facts/baked-products/5120/2"
+  },
+  {
+    "Id": "9",
+    "UserId": "1",
+    "Name": "Pepperjack Cheese",
+    "UnitSize": "1",
+    "UnitMeasure": "ounce",
+    "SiteUrl": "http://nutritiondata.self.com/facts/dairy-and-egg-products/24/2"
+  },
+  {
+    "Id": "10",
+    "UserId": "1",
+    "Name": "Ground Sausage",
+    "UnitSize": "0.167",
+    "UnitMeasure": "pound",
+    "SiteUrl": "http://nutritiondata.self.com/facts/sausages-and-luncheon-meats/1376/2"
+  },
+  {
+    "Id": "11",
+    "UserId": "1",
+    "Name": "Bacon",
+    "UnitSize": "2",
+    "UnitMeasure": "slice",
+    "SiteUrl": "http://nutritiondata.self.com/facts/pork-products/7354/2"
+  },
+  {
+    "Id": "12",
+    "UserId": "1",
+    "Name": "Cod",
+    "UnitSize": "1",
+    "UnitMeasure": "fillet",
+    "SiteUrl": "http://nutritiondata.self.com/facts/finfish-and-shellfish-products/4214/2"
+  },
+  {
+    "Id": "13",
+    "UserId": "1",
+    "Name": "Tilapia",
+    "UnitSize": "1",
+    "UnitMeasure": "ounce",
+    "SiteUrl": "http://nutritiondata.self.com/facts/finfish-and-shellfish-products/9244/2"
+  },
+  {
+    "Id": "14",
+    "UserId": "1",
+    "Name": "Salmon",
+    "UnitSize": "4",
+    "UnitMeasure": "ounce",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "15",
+    "UserId": "1",
+    "Name": "Chicken",
+    "UnitSize": "4",
+    "UnitMeasure": "ounce",
+    "SiteUrl": "http://nutritiondata.self.com/facts/poultry-products/703/2"
+  },
+  {
+    "Id": "16",
+    "UserId": "1",
+    "Name": "Lettuce",
+    "UnitSize": "1",
+    "UnitMeasure": "leaf",
+    "SiteUrl": "http://nutritiondata.self.com/facts/vegetables-and-vegetable-products/2477/2"
+  },
+  {
+    "Id": "17",
+    "UserId": "1",
+    "Name": "Zucchini",
+    "UnitSize": "90",
+    "UnitMeasure": "gram",
+    "SiteUrl": "http://nutritiondata.self.com/facts/vegetables-and-vegetable-products/2933/2"
+  },
+  {
+    "Id": "18",
+    "UserId": "1",
+    "Name": "Mushrooms",
+    "UnitSize": "108",
+    "UnitMeasure": "gram",
+    "SiteUrl": "http://nutritiondata.self.com/facts/vegetables-and-vegetable-products/9171/2"
+  },
+  {
+    "Id": "19",
+    "UserId": "1",
+    "Name": "Bell Peppers",
+    "UnitSize": "135",
+    "UnitMeasure": "gram",
+    "SiteUrl": "http://nutritiondata.self.com/facts/vegetables-and-vegetable-products/2537/2"
+  },
+  {
+    "Id": "20",
+    "UserId": "1",
+    "Name": "Black Powder",
+    "UnitSize": "1",
+    "UnitMeasure": "scoop",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "21",
+    "UserId": "1",
+    "Name": "Xtend",
+    "UnitSize": "1",
+    "UnitMeasure": "scoop",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "22",
+    "UserId": "1",
+    "Name": "Build HD",
+    "UnitSize": "1",
+    "UnitMeasure": "scoop",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "23",
+    "UserId": "1",
+    "Name": "Synthesize",
+    "UnitSize": "1",
+    "UnitMeasure": "scoop",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "24",
+    "UserId": "1",
+    "Name": "Protein Powder",
+    "UnitSize": "1",
+    "UnitMeasure": "scoop",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "25",
+    "UserId": "1",
+    "Name": "Preworkout",
+    "UnitSize": "1",
+    "UnitMeasure": "serving",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "26",
+    "UserId": "1",
+    "Name": "Postworkout",
+    "UnitSize": "1",
+    "UnitMeasure": "serving",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "27",
+    "UserId": "1",
+    "Name": "Mixed Vegetables",
+    "UnitSize": "8",
+    "UnitMeasure": "ounce",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "29",
+    "UserId": "1",
+    "Name": "Cottage Cheese",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": "http://nutritiondata.self.com/facts/dairy-and-egg-products/14/2"
+  },
+  {
+    "Id": "30",
+    "UserId": "1",
+    "Name": "Greek Yogurt",
+    "UnitSize": "150",
+    "UnitMeasure": "gram",
+    "SiteUrl": "https://nutritiondata.self.com/facts/custom/590715/2"
+  },
+  {
+    "Id": "31",
+    "UserId": "1",
+    "Name": "Swiss Cheese",
+    "UnitSize": "1",
+    "UnitMeasure": "ounce",
+    "SiteUrl": "http://nutritiondata.self.com/facts/dairy-and-egg-products/39/2"
+  },
+  {
+    "Id": "32",
+    "UserId": "1",
+    "Name": "Navy Beans",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": "http://nutritiondata.self.com/facts/legumes-and-legume-products/4308/2"
+  },
+  {
+    "Id": "33",
+    "UserId": "1",
+    "Name": "Pepperoni",
+    "UnitSize": "1",
+    "UnitMeasure": "ounce",
+    "SiteUrl": "http://nutritiondata.self.com/facts/sausages-and-luncheon-meats/1369/2"
+  },
+  {
+    "Id": "34",
+    "UserId": "1",
+    "Name": "Peanut Butter",
+    "UnitSize": "2",
+    "UnitMeasure": "tbsp",
+    "SiteUrl": "http://nutritiondata.self.com/facts/legumes-and-legume-products/4366/2"
+  },
+  {
+    "Id": "35",
+    "UserId": "1",
+    "Name": "Chocolate Pudding",
+    "UnitSize": "0.25",
+    "UnitMeasure": "pkg",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "36",
+    "UserId": "1",
+    "Name": "Vanilla Pudding",
+    "UnitSize": "0.25",
+    "UnitMeasure": "pkg",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "37",
+    "UserId": "1",
+    "Name": "Chocolate Protein Powder",
+    "UnitSize": "1",
+    "UnitMeasure": "scoop",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "38",
+    "UserId": "1",
+    "Name": "Vanilla Protein Powder",
+    "UnitSize": "1",
+    "UnitMeasure": "scoop",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "39",
+    "UserId": "1",
+    "Name": "Gelatin",
+    "UnitSize": "0.25",
+    "UnitMeasure": "pkg",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "41",
+    "UserId": "1",
+    "Name": "Greek Yogurt, Non-Fat",
+    "UnitSize": "150",
+    "UnitMeasure": "gram",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "42",
+    "UserId": "1",
+    "Name": "Chocolate Protein Smoothie",
+    "UnitSize": "1",
+    "UnitMeasure": "shake",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "43",
+    "UserId": "1",
+    "Name": "Vanilla Protein Smoothie",
+    "UnitSize": "1",
+    "UnitMeasure": "shake",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "44",
+    "UserId": "1",
+    "Name": "Chocolate Protein Smoothie 2",
+    "UnitSize": "1",
+    "UnitMeasure": "shake",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "45",
+    "UserId": "1",
+    "Name": "Chocolate Protein Smoothie 80g",
+    "UnitSize": "1",
+    "UnitMeasure": "shake",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "46",
+    "UserId": "1",
+    "Name": "Blackberries",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": "https://en.wikipedia.org/wiki/Blackberry"
+  },
+  {
+    "Id": "47",
+    "UserId": "1",
+    "Name": "Raspberries",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": "https://en.wikipedia.org/wiki/Raspberry"
+  },
+  {
+    "Id": "48",
+    "UserId": "1",
+    "Name": "Rice",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": "https://en.wikipedia.org/wiki/Rice"
+  },
+  {
+    "Id": "49",
+    "UserId": "1",
+    "Name": "Pea Pods",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": "http://nutritiondata.self.com/facts/vegetables-and-vegetable-products/2516/2"
+  },
+  {
+    "Id": "50",
+    "UserId": "1",
+    "Name": "Corn",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": "http://nutritiondata.self.com/facts/cereal-grains-and-pasta/5687/2"
+  },
+  {
+    "Id": "51",
+    "UserId": "1",
+    "Name": "Tomatoes",
+    "UnitSize": "1",
+    "UnitMeasure": "medium",
+    "SiteUrl": "http://nutritiondata.self.com/facts/vegetables-and-vegetable-products/2682/2"
+  },
+  {
+    "Id": "52",
+    "UserId": "1",
+    "Name": "Granny Smith Apple",
+    "UnitSize": "100",
+    "UnitMeasure": "g",
+    "SiteUrl": "https://www.nutritionvalue.org/Apples,_with_skin,_granny_smith,_raw_nutritional_value.html"
+  },
+  {
+    "Id": "53",
+    "UserId": "1",
+    "Name": "Chocolate Protein Smoothie III",
+    "UnitSize": "1",
+    "UnitMeasure": "shake",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "54",
+    "UserId": "1",
+    "Name": "Almond Milk",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": "https://silk.com/products/unsweetened-vanilla-almondmilk"
+  },
+  {
+    "Id": "55",
+    "UserId": "1",
+    "Name": "Tritip Steak",
+    "UnitSize": "3",
+    "UnitMeasure": "ounce",
+    "SiteUrl": "https://www.beefboard.org/news/files/TriTip.pdf"
+  },
+  {
+    "Id": "56",
+    "UserId": "1",
+    "Name": "Clementine",
+    "UnitSize": "1",
+    "UnitMeasure": "orange",
+    "SiteUrl": "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&cad=rja&uact=8&ved=0ahUKEwiCxPfBmbHYAhVp6YMKHSZKDxQQFggrMAE&url=http%3A%2F%2Fwww.myfitnesspal.com%2Ffood%2Fcalories%2Fcochran-halo-clementine-298370174&usg=AOvVaw0J2s8-YFdwEGEOMva5t81I"
+  },
+  {
+    "Id": "57",
+    "UserId": "1",
+    "Name": "Carrot",
+    "UnitSize": "61",
+    "UnitMeasure": "gram",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "58",
+    "UserId": "1",
+    "Name": "Cucumber",
+    "UnitSize": "52",
+    "UnitMeasure": "gram",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "59",
+    "UserId": "1",
+    "Name": "Cherry Tomatoes",
+    "UnitSize": "6",
+    "UnitMeasure": "tomatoe",
+    "SiteUrl": "http://www.myfitnesspal.com/food/calories/179745336"
+  },
+  {
+    "Id": "60",
+    "UserId": "1",
+    "Name": "Black Olives",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": "https://www.livestrong.com/article/395314-black-olives-nutritional-value/"
+  },
+  {
+    "Id": "61",
+    "UserId": "1",
+    "Name": "Vinaigrette",
+    "UnitSize": "1",
+    "UnitMeasure": "tablespoon",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "62",
+    "UserId": "1",
+    "Name": "Sweet Potatoes",
+    "UnitSize": "1",
+    "UnitMeasure": "cup",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "63",
+    "UserId": "1",
+    "Name": "Onions",
+    "UnitSize": "1",
+    "UnitMeasure": "onion",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "64",
+    "UserId": "1",
+    "Name": "Sausage and 2 Eggs",
+    "UnitSize": "1",
+    "UnitMeasure": "scramble",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "65",
+    "UserId": "1",
+    "Name": "Chocolate Protein Smoothie++",
+    "UnitSize": "1",
+    "UnitMeasure": "shake",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "66",
+    "UserId": "1",
+    "Name": "Chocolate Protein Smoothie--",
+    "UnitSize": "1",
+    "UnitMeasure": "shake",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "67",
+    "UserId": "1",
+    "Name": "Slim Shake",
+    "UnitSize": "1",
+    "UnitMeasure": "shake",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "68",
+    "UserId": "1",
+    "Name": "Dinner Tortilla",
+    "UnitSize": "1",
+    "UnitMeasure": "Tortilla",
+    "SiteUrl": ""
+  },
+  {
+    "Id": "69",
+    "UserId": "1",
+    "Name": "Quick Breakfast",
+    "UnitSize": "1",
+    "UnitMeasure": "Plate",
+    "SiteUrl": ""
+  }
+]
